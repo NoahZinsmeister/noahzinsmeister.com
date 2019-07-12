@@ -12,10 +12,14 @@ const Root = styled.div`
   overflow-y: auto;
 `
 
-const Link = styled.a.attrs({
-  target: '_blank',
-  rel: 'noopener noreferrer'
-})`
+const Link = styled.a.attrs(({ email }) =>
+  email
+    ? {}
+    : {
+        target: '_blank',
+        rel: 'noopener noreferrer'
+      }
+)`
   text-decoration: none;
 `
 
@@ -44,9 +48,11 @@ export default function Main() {
         I'm Noah!
       </h4>
       <Links>
-        <Link href="https://github.com/NoahZinsmeister">Github</Link>
-        <Link href="https://twitter.com/">Twitter</Link>
-        <Link href="mailto:noahwz@gmail.com">Email</Link>
+        <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
+        <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
+        <Link email href="mailto:noahwz@gmail.com">
+          Email
+        </Link>
       </Links>
     </Root>
   )
