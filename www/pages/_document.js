@@ -32,8 +32,12 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <meta charset="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#000000" />
+          <link rel="shortcut icon" href="static/favicon.ico" />
           <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet" />
-          <link rel="icon" href="static/favicon.ico" />
+          <title>Noah Zinsmeister</title>
         </Head>
         <body>
           <Main />
