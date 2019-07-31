@@ -9,7 +9,7 @@ const Root = styled.div`
   height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: ${rgba('gold', 0.5)};
+  background-color: ${rgba('gold', 0.4)};
 `
 
 const Body = styled.div`
