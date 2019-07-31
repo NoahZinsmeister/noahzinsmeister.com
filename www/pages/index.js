@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { rgba } from 'polished'
 
 const Root = styled.div`
   display: flex;
@@ -10,16 +12,19 @@ const Root = styled.div`
   align-items: center;
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: ${rgba('lightblue', 0.75)};
 `
 
-const Link = styled.a.attrs(({ email }) =>
-  email
-    ? {}
-    : {
-        target: '_blank',
-        rel: 'noopener noreferrer'
-      }
-)`
+const H3 = styled.h3`
+  margin-top: 0;
+`
+
+const LinkWrapper = styled.div``
+
+const Link = styled.a.attrs({
+  target: '_blank',
+  rel: 'noopener noreferrer'
+})`
   text-decoration: none;
 `
 
@@ -32,27 +37,69 @@ const Links = styled.div`
 
   margin-top: -1rem;
   margin-right: -1rem;
-  ${Link} {
+  ${LinkWrapper} {
     margin-top: 1rem;
     margin-right: 1rem;
   }
 `
 
+const CopyEmoji = styled.span`
+  padding: 0.5rem 0.5rem 0.5rem 0rem;
+  cursor: pointer;
+`
+
 export default function Main() {
+  const [copied, setCopied] = useState(false)
+
+  function onCopy() {
+    setCopied(true)
+  }
+
+  useEffect(() => {
+    if (copied) {
+      const reset = setTimeout(() => {
+        setCopied(false)
+      }, 500)
+
+      return () => {
+        clearTimeout(reset)
+      }
+    }
+  }, [copied])
+
   return (
     <Root>
-      <h4>
+      <H3>
         <span role="img" aria-label="wave">
           👋🏻
         </span>{' '}
         I'm Noah!
-      </h4>
+      </H3>
       <Links>
-        <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
-        <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
-        <Link email href="mailto:noahwz@gmail.com">
-          Email
-        </Link>
+        <LinkWrapper>
+          <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
+        </LinkWrapper>
+        <LinkWrapper>
+          <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
+        </LinkWrapper>
+        <LinkWrapper>
+          <Link href="mailto:noahwz@gmail.com">Email</Link>{' '}
+          {copied ? (
+            <CopyEmoji>
+              <span role="img" aria-label="copied">
+                👍🏻
+              </span>
+            </CopyEmoji>
+          ) : (
+            <CopyToClipboard text={'noahwz@gmail.com'} onCopy={onCopy}>
+              <CopyEmoji>
+                <span role="img" aria-label="copy">
+                  📋
+                </span>
+              </CopyEmoji>
+            </CopyToClipboard>
+          )}
+        </LinkWrapper>
       </Links>
     </Root>
   )
