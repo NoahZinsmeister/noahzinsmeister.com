@@ -9,6 +9,7 @@ const A = styled.a.attrs({
 })`
   text-decoration: none;
   color: ${({ theme }) => theme.linkBlue};
+  transition: color 200ms ease-out;
 
   :hover {
     cursor: pointer;
