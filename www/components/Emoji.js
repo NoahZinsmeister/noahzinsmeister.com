@@ -1,29 +1,55 @@
-import React from 'react'
-import styled from 'styled-components'
+import React, { useRef } from 'react'
+import styled, { css } from 'styled-components'
 
-const Span = styled.span.attrs(({ label }) => ({
-  role: 'img',
-  ariaLabel: label || 'emoji'
-}))`
+const EmojiSpan = styled.span`
   user-select: none;
+
+  ${({ clickable }) =>
+    clickable &&
+    css`
+      :hover {
+        cursor: pointer;
+      }
+    `}
 
   :active:focus {
     outline: none;
   }
 `
 
-export default function Emoji({ children, onClick, ...rest }) {
+export default function Emoji({ label = 'emoji', onClick = false, children, ...rest }) {
+  const ref = useRef()
   const clickable = !!onClick
 
+  function wrappedOnClick(event) {
+    event.preventDefault()
+    onClick(event)
+    ref.current && ref.current.blur()
+  }
+
   function onEnterPressed(event) {
+    event.preventDefault()
     if (event.key === 'Enter') {
       onClick(event)
     }
   }
 
   return (
-    <Span {...(clickable ? { onClick, onKeyPress: onEnterPressed, tabIndex: '0' } : {})} {...rest}>
+    <EmojiSpan
+      ref={ref}
+      role="img"
+      aria-label={label}
+      {...(clickable
+        ? {
+            clickable,
+            onClick: wrappedOnClick,
+            onKeyPress: onEnterPressed,
+            tabIndex: '0'
+          }
+        : {})}
+      {...rest}
+    >
       {children}
-    </Span>
+    </EmojiSpan>
   )
 }

@@ -18,6 +18,7 @@ function theme(isDarkMode) {
   return {
     textColor: isDarkMode ? white : black,
     backgroundColor: isDarkMode ? rgba(black, 0.6) : white,
+    outlineColor: isDarkMode ? white : blue,
 
     linkBlue: lighten(isDarkMode ? 0.5 : 0, blue)
   }
@@ -30,9 +31,17 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
   }
 
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    outline-width: thin;
+    outline-color: ${({ theme }) => theme.outlineColor};
+    transition: outline-color 200ms ease-out;
+  }
+
   html {
     font-family: 'Roboto Mono', monospace;
-    box-sizing: border-box;
     color: ${({ theme }) => theme.textColor};
     background-color: ${({ theme }) => theme.backgroundColor};
     transition: color 200ms ease-out, background-color 200ms ease-out;

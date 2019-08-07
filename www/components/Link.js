@@ -1,12 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useDarkModeManager } from '../context'
 import { darken } from 'polished'
 
-const A = styled.a.attrs({
-  target: '_blank',
-  rel: 'noopener noreferrer'
-})`
+const A = styled.a`
   text-decoration: none;
   color: ${({ theme }) => theme.linkBlue};
   transition: color 200ms ease-out;
@@ -16,7 +12,7 @@ const A = styled.a.attrs({
   }
 
   :active {
-    color: ${({ theme, isDarkMode }) => darken(isDarkMode ? 0.25 : 0.5, theme.linkBlue)};
+    color: ${({ theme }) => darken(0.75, theme.linkBlue)};
   }
 
   :visited {
@@ -29,10 +25,8 @@ const A = styled.a.attrs({
 `
 
 export default function Link({ children, ...rest }) {
-  const [isDarkMode] = useDarkModeManager()
-
   return (
-    <A isDarkMode={isDarkMode} {...rest}>
+    <A target="_blank" rel="noopener noreferrer" {...rest}>
       {children}
     </A>
   )

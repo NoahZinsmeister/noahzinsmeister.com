@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import * as copy from 'copy-to-clipboard'
+import copy from 'copy-to-clipboard'
 
 import Emoji from '../components/Emoji'
 import Link from '../components/Link'
@@ -43,8 +43,8 @@ const CopyEmoji = styled(Emoji)`
 export default function Main() {
   const [copied, setCopied] = useState(false)
 
-  function onCopy(text) {
-    copy(text)
+  function copyEmail() {
+    copy('noahwz@gmail.com')
     setCopied(true)
   }
 
@@ -74,18 +74,9 @@ export default function Main() {
         </LinkWrapper>
         <LinkWrapper>
           <Link href="mailto:noahwz@gmail.com">Email</Link>{' '}
-          {copied ? (
-            <CopyEmoji label="copied">👍🏻</CopyEmoji>
-          ) : (
-            <CopyEmoji
-              label="copy"
-              onClick={() => {
-                onCopy('noahwz@gmail.com')
-              }}
-            >
-              📋
-            </CopyEmoji>
-          )}
+          <CopyEmoji label={copied ? 'copied' : 'copy'} onClick={copied ? false : copyEmail}>
+            {copied ? '👍🏻' : '📋'}
+          </CopyEmoji>
         </LinkWrapper>
       </Links>
     </Body>
