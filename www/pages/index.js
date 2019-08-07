@@ -1,16 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-import { rgba } from 'polished'
+import * as copy from 'copy-to-clipboard'
 
-const Root = styled.div`
-  display: flex;
-  width: 100vw;
-  height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-  background-color: ${rgba('gold', 0.4)};
-`
+import Emoji from '../components/Emoji'
+import Link from '../components/Link'
 
 const Body = styled.div`
   display: flex;
@@ -42,22 +35,16 @@ const Links = styled.div`
   }
 `
 
-const Link = styled.a.attrs({
-  target: '_blank',
-  rel: 'noopener noreferrer'
-})`
-  text-decoration: none;
-`
-
-const CopyEmoji = styled.span`
-  padding: 0.5rem 0.5rem 0.5rem 0rem;
+const CopyEmoji = styled(Emoji)`
+  margin: 0.5rem;
   cursor: pointer;
 `
 
 export default function Main() {
   const [copied, setCopied] = useState(false)
 
-  function onCopy() {
+  function onCopy(text) {
+    copy(text)
     setCopied(true)
   }
 
@@ -74,41 +61,33 @@ export default function Main() {
   }, [copied])
 
   return (
-    <Root>
-      <Body>
-        <H3>
-          <span role="img" aria-label="wave">
-            👋🏻
-          </span>{' '}
-          I'm Noah!
-        </H3>
-        <Links>
-          <LinkWrapper>
-            <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
-          </LinkWrapper>
-          <LinkWrapper>
-            <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
-          </LinkWrapper>
-          <LinkWrapper>
-            <Link href="mailto:noahwz@gmail.com">Email</Link>{' '}
-            {copied ? (
-              <CopyEmoji>
-                <span role="img" aria-label="copied">
-                  👍🏻
-                </span>
-              </CopyEmoji>
-            ) : (
-              <CopyToClipboard text={'noahwz@gmail.com'} onCopy={onCopy}>
-                <CopyEmoji>
-                  <span role="img" aria-label="copy">
-                    📋
-                  </span>
-                </CopyEmoji>
-              </CopyToClipboard>
-            )}
-          </LinkWrapper>
-        </Links>
-      </Body>
-    </Root>
+    <Body>
+      <H3>
+        <Emoji label="wave">👋🏻</Emoji> I'm Noah!
+      </H3>
+      <Links>
+        <LinkWrapper>
+          <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
+        </LinkWrapper>
+        <LinkWrapper>
+          <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
+        </LinkWrapper>
+        <LinkWrapper>
+          <Link href="mailto:noahwz@gmail.com">Email</Link>{' '}
+          {copied ? (
+            <CopyEmoji label="copied">👍🏻</CopyEmoji>
+          ) : (
+            <CopyEmoji
+              label="copy"
+              onClick={() => {
+                onCopy('noahwz@gmail.com')
+              }}
+            >
+              📋
+            </CopyEmoji>
+          )}
+        </LinkWrapper>
+      </Links>
+    </Body>
   )
 }
