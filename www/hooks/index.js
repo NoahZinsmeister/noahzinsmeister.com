@@ -1,5 +1,24 @@
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState, useEffect, useCallback } from 'react'
 import ResizeObserver from 'resize-observer-polyfill'
+
+export function useBodyKeyDown(targetKey, onKeyDown) {
+  const downHandler = useCallback(
+    event => {
+      if (event.key === targetKey && event.target.tagName === 'BODY') {
+        event.preventDefault()
+        onKeyDown()
+      }
+    },
+    [targetKey, onKeyDown]
+  )
+
+  useEffect(() => {
+    window.addEventListener('keydown', downHandler)
+    return () => {
+      window.removeEventListener('keydown', downHandler)
+    }
+  }, [downHandler])
+}
 
 // modified from https://codesandbox.io/embed/lp80n9z7v9
 export function useMeasure() {

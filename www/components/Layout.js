@@ -3,6 +3,7 @@ import styled from 'styled-components'
 
 import { useDarkModeManager } from '../context'
 import SVGIcon, { GITHUB } from '../svg'
+import { useBodyKeyDown } from '../hooks'
 import Emoji from './Emoji'
 
 const Root = styled.div`
@@ -48,6 +49,8 @@ export default function Layout({ children }) {
   function openGitHub() {
     window.open('https://github.com/NoahZinsmeister/noahzinsmeister.com', '_blank')
   }
+
+  useBodyKeyDown('d', toggleDarkMode)
 
   return (
     <Root>

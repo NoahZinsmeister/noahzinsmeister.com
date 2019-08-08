@@ -6,7 +6,7 @@ import { animated, useSpring } from 'react-spring'
 
 import Emoji from '../components/Emoji'
 import Link from '../components/Link'
-import { useMeasure } from '../hooks'
+import { useMeasure, useBodyKeyDown } from '../hooks'
 
 const Intro = styled.div``
 
@@ -102,6 +102,14 @@ function Bio() {
     to: { height: observedInitial ? viewHeight : 'auto' }
   })
 
+  useBodyKeyDown('ArrowRight', () => {
+    select(1)
+  })
+
+  useBodyKeyDown('ArrowLeft', () => {
+    select(0)
+  })
+
   return (
     <BioWrapper>
       <LengthSelectors>
@@ -181,6 +189,8 @@ export default function Main() {
       }
     }
   }, [copied])
+
+  useBodyKeyDown('c', copyEmail)
 
   return (
     <>
