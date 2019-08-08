@@ -8,7 +8,6 @@ import Emoji from './Emoji'
 const Root = styled.div`
   display: flex;
   flex-direction: column;
-  flex: 0 1 auto;
   width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
@@ -17,6 +16,7 @@ const Root = styled.div`
 
 const Header = styled.div`
   display: flex;
+  flex: 0 1 auto;
   justify-content: flex-end;
 `
 
