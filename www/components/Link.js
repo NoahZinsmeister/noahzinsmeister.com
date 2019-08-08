@@ -4,7 +4,7 @@ import { darken } from 'polished'
 
 const A = styled.a`
   text-decoration: none;
-  color: ${({ theme }) => theme.linkBlue};
+  color: ${({ color, theme }) => color || theme.linkBlue};
   transition: color 200ms ease-out;
 
   :hover {
@@ -12,21 +12,13 @@ const A = styled.a`
   }
 
   :active {
-    color: ${({ theme }) => darken(0.75, theme.linkBlue)};
-  }
-
-  :visited {
-    color: ${({ theme }) => darken(0.25, theme.linkBlue)};
-  }
-
-  :active:visited {
-    color: ${({ theme }) => darken(0.75, theme.linkBlue)};
+    color: ${({ color, theme }) => darken(0.25, color || theme.linkBlue)};
   }
 `
 
-export default function Link({ children, ...rest }) {
+export default function Link({ color, children, ...rest }) {
   return (
-    <A target="_blank" rel="noopener noreferrer" {...rest}>
+    <A target="_blank" rel="noopener noreferrer" color={color} {...rest}>
       {children}
     </A>
   )

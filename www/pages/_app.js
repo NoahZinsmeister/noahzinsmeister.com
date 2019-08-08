@@ -17,10 +17,10 @@ const blue = '#0366D6'
 function theme(isDarkMode) {
   return {
     textColor: isDarkMode ? white : black,
-    backgroundColor: isDarkMode ? rgba(black, 0.6) : white,
+    backgroundColor: isDarkMode ? rgba(black, 0.7) : white,
     outlineColor: isDarkMode ? white : blue,
 
-    linkBlue: lighten(isDarkMode ? 0.5 : 0, blue)
+    linkBlue: lighten(isDarkMode ? 0.25 : 0, blue)
   }
 }
 

@@ -8,8 +8,9 @@ import Emoji from './Emoji'
 const Root = styled.div`
   display: flex;
   flex-direction: column;
+  flex: 0 1 auto;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   overflow-x: hidden;
   overflow-y: auto;
 `
@@ -23,9 +24,18 @@ const DarkThemeEmoji = styled(Emoji)`
   margin: 1rem;
 `
 
+const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+`
+
 const Footer = styled.div`
   display: flex;
   justify-content: flex-start;
+  flex: 0 1 auto;
 `
 
 const GitHub = styled(SVGIcon)`
@@ -41,17 +51,15 @@ export default function Layout({ children }) {
 
   return (
     <Root>
-      <>
-        <Header>
-          <DarkThemeEmoji label={isDarkMode ? 'moon' : 'sun'} onClick={toggleDarkMode}>
-            {isDarkMode ? '🌘' : '🌔'}
-          </DarkThemeEmoji>
-        </Header>
-        {children}
-        <Footer>
-          <GitHub name={GITHUB} width="1.5rem" fill={isDarkMode ? '#FFFFFF' : '#000000'} onClick={openGitHub} />
-        </Footer>
-      </>
+      <Header>
+        <DarkThemeEmoji label={isDarkMode ? 'moon' : 'sun'} onClick={toggleDarkMode}>
+          {isDarkMode ? '🌘' : '🌔'}
+        </DarkThemeEmoji>
+      </Header>
+      <Body>{children}</Body>
+      <Footer>
+        <GitHub name={GITHUB} width="24px" fill={isDarkMode ? '#FFFFFF' : '#000000'} onClick={openGitHub} />
+      </Footer>
     </Root>
   )
 }

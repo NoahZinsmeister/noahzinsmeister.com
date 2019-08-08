@@ -3,6 +3,7 @@ import styled, { css } from 'styled-components'
 
 const EmojiSpan = styled.span`
   user-select: none;
+  font-size: 24px;
 
   ${({ clickable }) =>
     clickable &&
