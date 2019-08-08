@@ -33,7 +33,7 @@ const CopyEmoji = styled(Emoji)`
 `
 
 const BioWrapper = styled.div`
-  margin-top: 3rem;
+  margin-top: 4rem;
   width: 100%;
 `
 
@@ -130,10 +130,10 @@ function Bio() {
           ) : (
             <P>
               I have a B.A. in Economics-Mathematics from <span style={{ color: '#B9D9EB' }}>Columbia University</span>.
-              After graduating I spent nearly two years at the New York Fed working as a Senior Research Analyst in the
-              Money and Payments Studies division. My long-standing interest cryptocurrencies eventually led me to an
-              engineering role at Hydrogen, where I wrote security grade smart contracts, co-authored{' '}
-              <Link href="https://erc1484.org/">ERC-1484</Link> (a blockchain-based identity protocol), and developed
+              After graduating I spent nearly two years at the Federal Reserve Bank of New York working as a Senior
+              Research Analyst in the Money and Payments Studies division. My long-standing interest in cryptocurrencies
+              eventually led me to an engineering role at Hydrogen, where I wrote security grade smart contracts,
+              co-authored <Link href="https://erc1484.org/">ERC-1484</Link> (a digital identity protocol), and developed
               open-source blockchain tooling. I'm now a Senior Engineer at{' '}
               <Link color="#DC6BE5" href="https://uniswap.io/">
                 Uniswap
