@@ -64,14 +64,18 @@ const BioEmoji = styled(Emoji)`
   }
 `
 
-const DescriptionWrapper = styled(animated.div)`
-  margin: 1rem 4rem 1rem 4rem;
+const DescriptionWrapper = styled(animated.div)``
+
+const Description = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
-const Description = styled.div``
-
 const P = styled.p`
+  max-width: 50rem;
   word-wrap: break-word;
+  margin: 1rem 2rem 1rem 2rem;
 `
 
 function Bio() {
