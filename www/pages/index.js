@@ -82,6 +82,13 @@ const P = styled.p`
 function Bio() {
   const router = useRouter()
   const [selected, setSelected] = useState(router.query.description === 'long' ? 1 : 0)
+  useEffect(() => {
+    if (router.query.description === 'long') {
+      setSelected(1)
+    } else {
+      setSelected(0)
+    }
+  }, [router.query.description])
 
   function select(newSelected) {
     if (newSelected !== selected) {
