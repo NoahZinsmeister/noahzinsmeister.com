@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import styled from 'styled-components'
 import copy from 'copy-to-clipboard'
 import { animated, useSpring } from 'react-spring'
@@ -9,7 +10,7 @@ import { useMeasure } from '../hooks'
 
 const Intro = styled.div``
 
-const H3 = styled.h3`
+const H2 = styled.h2`
   margin-top: 0;
 `
 
@@ -79,7 +80,8 @@ const P = styled.p`
 `
 
 function Bio() {
-  const [selected, setSelected] = useState(0)
+  const router = useRouter()
+  const [selected, setSelected] = useState(router.query.description === 'long' ? 1 : 0)
 
   function select(newSelected) {
     if (newSelected !== selected) {
@@ -100,6 +102,7 @@ function Bio() {
           <BioEmoji
             label="short"
             onClick={() => {
+              router.push('/')
               select(0)
             }}
             selected={selected === 0}
@@ -111,6 +114,7 @@ function Bio() {
           <BioEmoji
             label="long"
             onClick={() => {
+              router.push('/?description=long')
               select(1)
             }}
             selected={selected === 1}
@@ -174,9 +178,9 @@ export default function Main() {
   return (
     <>
       <Intro>
-        <H3>
+        <H2>
           <Emoji label="wave">👋🏻</Emoji> I'm Noah!
-        </H3>
+        </H2>
       </Intro>
       <Links>
         <LinkWrapper>
