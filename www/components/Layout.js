@@ -34,7 +34,7 @@ const Body = styled.div`
 
 const Footer = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: flex-end;
   flex: 0 1 auto;
 `
 
