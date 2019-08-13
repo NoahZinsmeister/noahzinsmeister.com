@@ -1,23 +1,27 @@
-import { useRef, useState, useEffect, useCallback } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import ResizeObserver from 'resize-observer-polyfill'
 
-export function useBodyKeyDown(targetKey, onKeyDown) {
-  const downHandler = useCallback(
-    event => {
-      if (event.key === targetKey && event.target.tagName === 'BODY') {
+import { useStringFlasher } from '../contexts/Application'
+
+export function useBodyKeyDown(targetKey, onKeyDown, stringToFlash, suppress = false) {
+  const [, , setStringToFlash] = useStringFlasher()
+
+  function downHandler(event) {
+    if (event.target.tagName === 'BODY' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
+      if (event.key === targetKey && !suppress) {
         event.preventDefault()
+        setStringToFlash(stringToFlash || targetKey)
         onKeyDown()
       }
-    },
-    [targetKey, onKeyDown]
-  )
+    }
+  }
 
   useEffect(() => {
     window.addEventListener('keydown', downHandler)
     return () => {
       window.removeEventListener('keydown', downHandler)
     }
-  }, [downHandler])
+  })
 }
 
 // modified from https://codesandbox.io/embed/lp80n9z7v9

@@ -6,7 +6,13 @@ import { rgba, lighten } from 'polished'
 import Cookies from 'js-cookie'
 import nextCookies from 'next-cookies'
 
-import Context, { Updater, COOKIE_NAME, DARK_MODE, useDarkModeManager } from '../context'
+import CookieContext, {
+  COOKIE_NAME,
+  DARK_MODE,
+  Updater as CookieContextUpdater,
+  useDarkModeManager
+} from '../contexts/Cookie'
+import ApplicationContext from '../contexts/Application'
 import Layout from '../components/Layout'
 import { parseCookie } from '../utils'
 
@@ -100,12 +106,14 @@ export default class MyApp extends App {
         <Head>
           <title>Noah Zinsmeister</title>
         </Head>
-        <Context darkModeInitial={darkModeInitial}>
-          <Updater />
-          <Body>
-            <Component {...pageProps} />
-          </Body>
-        </Context>
+        <CookieContext darkModeInitial={darkModeInitial}>
+          <ApplicationContext>
+            <CookieContextUpdater />
+            <Body>
+              <Component {...pageProps} />
+            </Body>
+          </ApplicationContext>
+        </CookieContext>
       </Container>
     )
   }

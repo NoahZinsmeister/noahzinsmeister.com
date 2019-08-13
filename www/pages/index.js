@@ -8,6 +8,9 @@ import Emoji from '../components/Emoji'
 import Link from '../components/Link'
 import { useMeasure, useBodyKeyDown } from '../hooks'
 
+const SHORT = 'SHORT'
+const LONG = 'LONG'
+
 const Intro = styled.div``
 
 const H2 = styled.h2`
@@ -81,66 +84,52 @@ const P = styled.p`
 
 function Bio() {
   const router = useRouter()
-  const [selected, setSelected] = useState(router.query.description === 'long' ? 1 : 0)
+  const [selected, setSelected] = useState(router.query.description === 'long' ? LONG : SHORT)
   useEffect(() => {
     if (router.query.description === 'long') {
-      setSelected(1)
+      setSelected(LONG)
     } else {
-      setSelected(0)
+      setSelected(SHORT)
     }
   }, [router.query.description])
 
-  function select(newSelected) {
-    if (newSelected !== selected) {
-      setSelected(newSelected)
-    }
+  function setShortBio() {
+    setSelected(SHORT)
+    router.push('/')
+  }
+
+  function setLongBio() {
+    setSelected(LONG)
+    router.push('/?description=long')
   }
 
   const [bind, { height: viewHeight }, observedInitial] = useMeasure()
   const { height } = useSpring({
     from: { height: observedInitial ? viewHeight : 'auto' },
-    to: { height: observedInitial ? viewHeight : 'auto' }
+    to: { height: observedInitial ? viewHeight : 'auto' },
+    config: { duration: 200 * 1.5 }
   })
 
-  useBodyKeyDown('ArrowRight', () => {
-    select(1)
-  })
-
-  useBodyKeyDown('ArrowLeft', () => {
-    select(0)
-  })
+  useBodyKeyDown('ArrowLeft', setShortBio, '←', selected === SHORT)
+  useBodyKeyDown('ArrowRight', setLongBio, '→', selected === LONG)
 
   return (
     <BioWrapper>
       <LengthSelectors>
         <LengthSelectorWrapper>
-          <BioEmoji
-            label="short"
-            onClick={() => {
-              router.push('/')
-              select(0)
-            }}
-            selected={selected === 0}
-          >
+          <BioEmoji label="short" onClick={setShortBio} selected={selected === SHORT}>
             ⬇️
           </BioEmoji>
         </LengthSelectorWrapper>
         <LengthSelectorWrapper>
-          <BioEmoji
-            label="long"
-            onClick={() => {
-              router.push('/?description=long')
-              select(1)
-            }}
-            selected={selected === 1}
-          >
+          <BioEmoji label="long" onClick={setLongBio} selected={selected === LONG}>
             ⬇️⬇️
           </BioEmoji>
         </LengthSelectorWrapper>
       </LengthSelectors>
       <DescriptionWrapper style={{ height: observedInitial ? height : 'auto' }}>
         <Description {...bind}>
-          {selected === 0 ? (
+          {selected === SHORT ? (
             <P>
               I graduated from <span style={{ color: '#B9D9EB' }}>Columbia</span> in 2016, where I studied economics and
               math. After a close call with an econ PhD I became fascinated with cryptocurrencies, and have since gone
@@ -182,7 +171,7 @@ export default function Main() {
     if (copied) {
       const reset = setTimeout(() => {
         setCopied(false)
-      }, 500)
+      }, 200 * 2)
 
       return () => {
         clearTimeout(reset)
@@ -190,7 +179,7 @@ export default function Main() {
     }
   }, [copied])
 
-  useBodyKeyDown('c', copyEmail)
+  useBodyKeyDown('c', copyEmail, undefined, copied === true)
 
   return (
     <>
