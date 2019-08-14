@@ -42,6 +42,8 @@ const Footer = styled.div`
 `
 
 const KeyFlash = styled(animated.p)`
+  display: flex;
+  align-items: flex-end;
   margin: 1rem;
   user-select: none;
 `
