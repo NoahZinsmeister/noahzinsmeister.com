@@ -7,6 +7,7 @@ import { useStringFlasher } from '../contexts/Application'
 import { useBodyKeyDown } from '../hooks'
 import SVGIcon, { GITHUB } from '../svg'
 import Emoji from './Emoji'
+import Link from './Link'
 
 const Root = styled.div`
   display: flex;
@@ -48,8 +49,11 @@ const KeyFlash = styled(animated.p)`
   user-select: none;
 `
 
-const GitHub = styled(SVGIcon)`
+const GitHubLink = styled(Link)`
   margin: 1rem;
+  padding: 0;
+  display: flex;
+  align-items: flex-end;
 `
 
 export default function Layout({ children }) {
@@ -71,10 +75,6 @@ export default function Layout({ children }) {
     }
   }, [stringToFlash, stringToFlashKey, set])
 
-  function openGitHub() {
-    window.open('https://github.com/NoahZinsmeister/noahzinsmeister.com', '_blank')
-  }
-
   useBodyKeyDown('d', toggleDarkMode)
 
   return (
@@ -87,7 +87,9 @@ export default function Layout({ children }) {
       <Body>{children}</Body>
       <Footer>
         <KeyFlash style={props}>{stringToFlash}</KeyFlash>
-        <GitHub name={GITHUB} width="24px" fill={isDarkMode ? '#FFFFFF' : '#000000'} onClick={openGitHub} />
+        <GitHubLink href="https://github.com/NoahZinsmeister/noahzinsmeister.com">
+          <SVGIcon name={GITHUB} width="24px" fill={isDarkMode ? '#FFFFFF' : '#000000'} />
+        </GitHubLink>
       </Footer>
     </Root>
   )
