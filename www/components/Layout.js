@@ -36,6 +36,7 @@ export default function Layout({ children }) {
           flex-direction: column;
           width: 100vw;
           min-height: 100vh;
+          overflow-x: hidden;
         }
 
         .header {
