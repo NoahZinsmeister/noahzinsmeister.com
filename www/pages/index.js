@@ -105,6 +105,7 @@ function Bio() {
         .wrapper {
           margin-top: 4rem;
           max-width: 50rem;
+          margin-bottom: 5vh;
         }
 
         .length-selectors {
@@ -190,7 +191,7 @@ export default function Main() {
 
       <style jsx>{`
         .title {
-          margin-top: 4rem;
+          margin-top: 5vh;
           margin-bottom: 2rem;
         }
 
