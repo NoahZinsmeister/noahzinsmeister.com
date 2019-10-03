@@ -6,42 +6,6 @@ import Emoji from '../components/Emoji'
 import Link from '../components/Link'
 import { useBodyKeyDown } from '../hooks'
 
-// const LinkWrapper = styled.div``
-
-// const Links = styled.div`
-// `
-
-// const CopyEmoji = styled(Emoji)`
-//   line-height: 1rem;
-//   margin: 0.5rem;
-//   cursor: pointer;
-// `
-
-// const BioWrapper = styled.div`
-//   margin-top: 4rem;
-//   width: 100%;
-// `
-
-// const LengthSelectorWrapper = styled.div``
-
-// const BioEmoji = styled(Emoji)`
-//   height: auto;
-//   text-underline-position: under;
-//   text-decoration: ${({ selected }) => selected && 'underline'};
-
-//   :hover {
-//     text-decoration: underline;
-//   }
-// `
-
-// const DescriptionWrapper = styled(animated.div)``
-
-// const Description = styled.div`
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// `
-
 const SHORT = 'SHORT'
 const LONG = 'LONG'
 
@@ -94,9 +58,11 @@ function Bio() {
             at the Federal Reserve Bank of New York working as a Senior Research Analyst in the Money and Payments
             Studies division. My long-standing interest in cryptocurrencies eventually led me to an engineering role at
             Hydrogen, where I wrote security grade smart contracts, co-authored{' '}
-            <Link href="https://erc1484.org/">ERC-1484</Link> (a digital identity protocol), and developed open-source
-            blockchain tooling. I'm now a Senior Engineer at <Link href="https://uniswap.io/">Uniswap</Link>, a
-            decentralized exchange protocol for trading Ethereum-based assets.
+            <Link href="https://github.com/ethereum/EIPs/issues/1495">ERC-1484</Link> (a digital identity protocol), and
+            developed open-source blockchain tooling. I'm now a Senior Engineer at{' '}
+            <Link href="https://uniswap.io/">Uniswap</Link>, a decentralized exchange protocol for trading
+            Ethereum-based assets. I also take <Link href="https://noahzinsmeisterphotography.com/">photos</Link>{' '}
+            sometimes.
           </p>
         )}
       </div>
