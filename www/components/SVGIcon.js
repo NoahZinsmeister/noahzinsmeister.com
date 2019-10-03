@@ -1,5 +1,4 @@
 import React, { useRef } from 'react'
-import styled, { css } from 'styled-components'
 
 const VIEW_BOX = 'VIEWBOX'
 const PATH = 'PATH'
@@ -36,32 +35,14 @@ C438.536,184.851,428.728,148.168,409.132,114.573z"
   }
 }
 
-const SVG = styled.svg`
-  user-select: none;
-
-  ${({ clickable }) =>
-    clickable &&
-    css`
-      :hover {
-        cursor: pointer;
-      }
-    `}
-
-  :active:focus {
-    outline: none;
-  }
-`
-
-export default function SVGIcon({ name, width = '1rem', fill = '#000000', onClick = false, ...rest }) {
+export default function SVGIcon({ name, width, fill, onClick, ...rest }) {
   const { [VIEW_BOX]: viewBox, [PATH]: path } = ALL_SVGS[name]
 
   const ref = useRef()
-  const clickable = !!onClick
 
   function wrappedOnClick(event) {
-    event.preventDefault()
+    ref.current.blur()
     onClick(event)
-    ref.current && ref.current.blur()
   }
 
   function onEnterPressed(event) {
@@ -72,24 +53,38 @@ export default function SVGIcon({ name, width = '1rem', fill = '#000000', onClic
   }
 
   return (
-    <SVG
-      ref={ref}
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-      {...(clickable
-        ? {
-            clickable,
-            onClick: wrappedOnClick,
-            onKeyPress: onEnterPressed,
-            tabIndex: '0'
-          }
-        : {})}
-      width={width}
-      fill={fill}
-      viewBox={viewBox}
-      {...rest}
-    >
-      {path}
-    </SVG>
+    <>
+      <svg
+        ref={ref}
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+        onClick={!!onClick ? wrappedOnClick : undefined}
+        onKeyPress={!!onClick ? onEnterPressed : undefined}
+        tabIndex={!!onClick ? 0 : undefined}
+        viewBox={viewBox}
+        {...rest}
+      >
+        {path}
+      </svg>
+      <style jsx>{`
+        svg {
+          user-select: none;
+          fill: ${fill};
+          width: ${width};
+        }
+
+        span:hover {
+          ${!!onClick &&
+            `
+          cursor: pointer;`}
+        }
+
+        span:active:focus {
+          ${!!onClick &&
+            `
+            outline: none;`}
+        }
+      `}</style>
+    </>
   )
 }

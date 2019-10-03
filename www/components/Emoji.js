@@ -1,31 +1,11 @@
-import React, { useRef } from 'react'
-import styled, { css } from 'styled-components'
+import { useRef } from 'react'
 
-const EmojiSpan = styled.span`
-  user-select: none;
-  font-size: 24px;
-
-  ${({ clickable }) =>
-    clickable &&
-    css`
-      :hover {
-        cursor: pointer;
-      }
-    `}
-
-  :active:focus {
-    outline: none;
-  }
-`
-
-export default function Emoji({ label = 'emoji', onClick = false, children, ...rest }) {
+export default function Emoji({ emoji, label = 'emoji', onClick, ...rest }) {
   const ref = useRef()
-  const clickable = !!onClick
 
   function wrappedOnClick(event) {
-    event.preventDefault()
+    ref.current.blur()
     onClick(event)
-    ref.current && ref.current.blur()
   }
 
   function onEnterPressed(event) {
@@ -36,21 +16,37 @@ export default function Emoji({ label = 'emoji', onClick = false, children, ...r
   }
 
   return (
-    <EmojiSpan
-      ref={ref}
-      role="img"
-      aria-label={label}
-      {...(clickable
-        ? {
-            clickable,
-            onClick: wrappedOnClick,
-            onKeyPress: onEnterPressed,
-            tabIndex: '0'
-          }
-        : {})}
-      {...rest}
-    >
-      {children}
-    </EmojiSpan>
+    <>
+      <span
+        ref={ref}
+        role="img"
+        aria-label={label}
+        onClick={!!onClick ? wrappedOnClick : undefined}
+        onKeyPress={!!onClick ? onEnterPressed : undefined}
+        tabIndex={!!onClick ? 0 : undefined}
+        {...rest}
+      >
+        {emoji}
+      </span>
+      <style jsx>{`
+        span {
+          user-select: none;
+          font-size: 24px;
+          line-height: 24px;
+        }
+
+        span:hover {
+          ${!!onClick &&
+            `
+          cursor: pointer;`}
+        }
+
+        span:active:focus {
+          ${!!onClick &&
+            `
+            outline: none;`}
+        }
+      `}</style>
+    </>
   )
 }

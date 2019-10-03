@@ -1,161 +1,138 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import styled from 'styled-components'
 import copy from 'copy-to-clipboard'
-import { animated, useSpring } from 'react-spring'
 
 import Emoji from '../components/Emoji'
 import Link from '../components/Link'
-import { useMeasure, useBodyKeyDown } from '../hooks'
+import { useBodyKeyDown } from '../hooks'
+
+// const LinkWrapper = styled.div``
+
+// const Links = styled.div`
+// `
+
+// const CopyEmoji = styled(Emoji)`
+//   line-height: 1rem;
+//   margin: 0.5rem;
+//   cursor: pointer;
+// `
+
+// const BioWrapper = styled.div`
+//   margin-top: 4rem;
+//   width: 100%;
+// `
+
+// const LengthSelectorWrapper = styled.div``
+
+// const BioEmoji = styled(Emoji)`
+//   height: auto;
+//   text-underline-position: under;
+//   text-decoration: ${({ selected }) => selected && 'underline'};
+
+//   :hover {
+//     text-decoration: underline;
+//   }
+// `
+
+// const DescriptionWrapper = styled(animated.div)``
+
+// const Description = styled.div`
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// `
 
 const SHORT = 'SHORT'
 const LONG = 'LONG'
 
-const Intro = styled.div``
-
-const H2 = styled.h2`
-  margin-top: 0;
-`
-
-const LinkWrapper = styled.div``
-
-const Links = styled.div`
-  display: flex;
-
-  margin-top: -1rem;
-  margin-right: -1rem;
-  ${LinkWrapper} {
-    margin-top: 1rem;
-    margin-right: 1rem;
-  }
-`
-
-const CopyEmoji = styled(Emoji)`
-  line-height: 1rem;
-  margin: 0.5rem;
-  cursor: pointer;
-`
-
-const BioWrapper = styled.div`
-  margin-top: 4rem;
-  width: 100%;
-`
-
-const LengthSelectorWrapper = styled.div``
-
-const LengthSelectors = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: -1rem;
-  margin-right: -2rem;
-  ${LengthSelectorWrapper} {
-    margin-top: 1rem;
-    margin-right: 2em;
-  }
-`
-
-const BioEmoji = styled(Emoji)`
-  height: auto;
-  text-underline-position: under;
-  text-decoration: ${({ selected }) => selected && 'underline'};
-
-  :hover {
-    text-decoration: underline;
-  }
-`
-
-const DescriptionWrapper = styled(animated.div)``
-
-const Description = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`
-
-const P = styled.p`
-  max-width: 50rem;
-  word-wrap: break-word;
-  margin: 1rem 2rem 1rem 2rem;
-`
-
 function Bio() {
   const router = useRouter()
-  const [selected, setSelected] = useState(router.query.description === 'long' ? LONG : SHORT)
-  useEffect(() => {
-    if (router.query.description === 'long') {
-      setSelected(LONG)
-    } else {
-      setSelected(SHORT)
-    }
-  }, [router.query.description])
+  const selected = router.query.description === 'long' ? LONG : SHORT
 
   function setShortBio() {
-    setSelected(SHORT)
-    router.push('/')
+    router.push('/', undefined, { shallow: true })
   }
 
   function setLongBio() {
-    setSelected(LONG)
-    router.push('/?description=long')
+    router.push({ pathname: '/', query: { description: 'long' } }, undefined, { shallow: true })
   }
 
-  const [bind, { height: viewHeight }, observedInitial] = useMeasure()
-  const { height } = useSpring({
-    from: { height: observedInitial ? viewHeight : 'auto' },
-    to: { height: observedInitial ? viewHeight : 'auto' },
-    config: { duration: 200 * 1.5 }
-  })
-
-  useBodyKeyDown('ArrowLeft', setShortBio, '←', selected === SHORT)
-  useBodyKeyDown('ArrowRight', setLongBio, '→', selected === LONG)
+  useBodyKeyDown('ArrowRight', setLongBio, selected === LONG)
+  useBodyKeyDown('ArrowLeft', setShortBio, selected === SHORT)
 
   return (
-    <BioWrapper>
-      <LengthSelectors>
-        <LengthSelectorWrapper>
-          <BioEmoji label="short" onClick={setShortBio} selected={selected === SHORT}>
-            ⬇️
-          </BioEmoji>
-        </LengthSelectorWrapper>
-        <LengthSelectorWrapper>
-          <BioEmoji label="long" onClick={setLongBio} selected={selected === LONG}>
-            ⬇️⬇️
-          </BioEmoji>
-        </LengthSelectorWrapper>
-      </LengthSelectors>
-      <DescriptionWrapper style={{ height: observedInitial ? height : 'auto' }}>
-        <Description {...bind}>
-          {selected === SHORT ? (
-            <P>
-              I graduated from <span style={{ color: '#B9D9EB' }}>Columbia</span> in 2016, where I studied economics and
-              math. After a close call with an econ PhD I became fascinated with cryptocurrencies, and have since gone
-              fully down the rabbit hole. Right now I'm a Senior Engineer at{' '}
-              <Link color="#DC6BE5" href="https://uniswap.io/">
-                Uniswap
-              </Link>
-              , a decentralized exchange built on Ethereum.
-            </P>
-          ) : (
-            <P>
-              I have a B.A. in Economics-Mathematics from <span style={{ color: '#B9D9EB' }}>Columbia University</span>.
-              After graduating I spent nearly two years at the Federal Reserve Bank of New York working as a Senior
-              Research Analyst in the Money and Payments Studies division. My long-standing interest in cryptocurrencies
-              eventually led me to an engineering role at Hydrogen, where I wrote security grade smart contracts,
-              co-authored <Link href="https://erc1484.org/">ERC-1484</Link> (a digital identity protocol), and developed
-              open-source blockchain tooling. I'm now a Senior Engineer at{' '}
-              <Link color="#DC6BE5" href="https://uniswap.io/">
-                Uniswap
-              </Link>
-              , a decentralized exchange protocol for trading Ethereum-based assets.
-            </P>
-          )}
-        </Description>
-      </DescriptionWrapper>
-    </BioWrapper>
+    <>
+      <div className="wrapper">
+        <div className="length-selectors">
+          <div className="length-selector">
+            <Emoji
+              style={selected === SHORT ? { textDecoration: 'underline', textUnderlinePosition: 'under' } : {}}
+              emoji="⬇️"
+              label="short"
+              onClick={setShortBio}
+            />
+          </div>
+          <div className="length-selector">
+            <Emoji
+              style={selected === LONG ? { textDecoration: 'underline', textUnderlinePosition: 'under' } : {}}
+              emoji="⬇️⬇️"
+              label="long"
+              onClick={setLongBio}
+            />
+          </div>
+        </div>
+        {selected === SHORT ? (
+          <p>
+            I graduated from Columbia in 2016, where I studied economics and math. After a close call with an econ PhD I
+            became fascinated with cryptocurrencies, and have since gone fully down the rabbit hole. Right now I'm a
+            Senior Engineer at <Link href="https://uniswap.io/">Uniswap</Link>, a decentralized exchange built on
+            Ethereum.
+          </p>
+        ) : (
+          <p>
+            I have a B.A. in Economics-Mathematics from Columbia University. After graduating I spent nearly two years
+            at the Federal Reserve Bank of New York working as a Senior Research Analyst in the Money and Payments
+            Studies division. My long-standing interest in cryptocurrencies eventually led me to an engineering role at
+            Hydrogen, where I wrote security grade smart contracts, co-authored{' '}
+            <Link href="https://erc1484.org/">ERC-1484</Link> (a digital identity protocol), and developed open-source
+            blockchain tooling. I'm now a Senior Engineer at <Link href="https://uniswap.io/">Uniswap</Link>, a
+            decentralized exchange protocol for trading Ethereum-based assets.
+          </p>
+        )}
+      </div>
+
+      <style jsx>{`
+        .wrapper {
+          margin-top: 4rem;
+          max-width: 50rem;
+        }
+
+        .length-selectors {
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          margin-bottom: 1rem;
+
+          margin-top: -1rem;
+          margin-right: -2rem;
+        }
+
+        .length-selectors .length-selector {
+          margin-top: 1rem;
+          margin-right: 2em;
+        }
+
+        .selected {
+          margin: 20rem;
+        }
+
+        p {
+          word-wrap: break-word;
+          margin: 0 2rem 0 2rem;
+          text-align: justify;
+        }
+      `}</style>
+    </>
   )
 }
 
@@ -169,40 +146,66 @@ export default function Main() {
 
   useEffect(() => {
     if (copied) {
-      const reset = setTimeout(() => {
+      const timeout = setTimeout(() => {
         setCopied(false)
-      }, 200 * 2)
+      }, 500)
 
       return () => {
-        clearTimeout(reset)
+        clearTimeout(timeout)
       }
     }
   }, [copied])
 
-  useBodyKeyDown('c', copyEmail, undefined, copied === true)
+  useBodyKeyDown('c', copyEmail, copied === true)
 
   return (
     <>
-      <Intro>
-        <H2>
-          <Emoji label="wave">👋🏻</Emoji> I'm Noah!
-        </H2>
-      </Intro>
-      <Links>
-        <LinkWrapper>
+      <div>
+        <h2 className="title">
+          <Emoji emoji="👋🏻" label="wave" /> I'm Noah!
+        </h2>
+      </div>
+
+      <div className="links">
+        <div className="link-wrapper">
           <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
-        </LinkWrapper>
-        <LinkWrapper>
+        </div>
+
+        <div className="link-wrapper">
           <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
-        </LinkWrapper>
-        <LinkWrapper>
+        </div>
+
+        <div className="link-wrapper">
           <Link href="mailto:noahwz@gmail.com">Email</Link>
-          <CopyEmoji label={copied ? 'copied' : 'copy'} onClick={copied ? false : copyEmail}>
-            {copied ? '👍🏻' : '📋'}
-          </CopyEmoji>
-        </LinkWrapper>
-      </Links>
+          <Emoji
+            style={{ marginLeft: '.5rem' }}
+            emoji={copied ? '👍🏻' : '📋'}
+            label={copied ? 'copied' : 'copy'}
+            onClick={!copied && copyEmail}
+          />
+        </div>
+      </div>
+
       <Bio />
+
+      <style jsx>{`
+        .title {
+          margin-top: 4rem;
+          margin-bottom: 2rem;
+        }
+
+        .links {
+          display: flex;
+          margin-top: -1rem;
+          margin-right: -1rem;
+        }
+
+        .links .link-wrapper {
+          display: flex;
+          margin-top: 1rem;
+          margin-right: 1rem;
+        }
+      `}</style>
     </>
   )
 }

@@ -1,96 +1,62 @@
-import React, { useEffect } from 'react'
-import styled from 'styled-components'
-import { useSpring, animated } from 'react-spring'
-
-import { useDarkModeManager } from '../contexts/Cookie'
-import { useStringFlasher } from '../contexts/Application'
 import { useBodyKeyDown } from '../hooks'
-import SVGIcon, { GITHUB } from '../svg'
+import { useDarkModeManager } from '../contexts/Cookie'
+import SVGIcon, { GITHUB } from './SVGIcon'
 import Emoji from './Emoji'
 import Link from './Link'
-
-const Root = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-`
-
-const Header = styled.div`
-  display: flex;
-  flex: 0 1 auto;
-  justify-content: flex-end;
-`
-
-const DarkThemeEmoji = styled(Emoji)`
-  margin: 1rem;
-`
-
-const Body = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 1 1 auto;
-  justify-content: center;
-  align-items: center;
-`
-
-const Footer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex: 0 1 auto;
-`
-
-const KeyFlash = styled(animated.p)`
-  display: flex;
-  align-items: flex-end;
-  margin: 1rem;
-  user-select: none;
-`
-
-const GitHubLink = styled(Link)`
-  margin: 1rem;
-  padding: 0;
-  display: flex;
-  align-items: flex-end;
-`
+import useTheme from '../theme'
 
 export default function Layout({ children }) {
   const [isDarkMode, toggleDarkMode] = useDarkModeManager()
-
-  const [stringToFlash, stringToFlashKey] = useStringFlasher()
-  const [props, set] = useSpring(() => ({
-    from: { opacity: 1 },
-    to: { opacity: 0 },
-    config: { duration: 200 * 2 }
-  }))
-
-  useEffect(() => {
-    if (stringToFlash) {
-      set({
-        from: { opacity: 1 },
-        reset: true
-      })
-    }
-  }, [stringToFlash, stringToFlashKey, set])
+  const theme = useTheme()
 
   useBodyKeyDown('d', toggleDarkMode)
 
   return (
-    <Root>
-      <Header>
-        <DarkThemeEmoji label={isDarkMode ? 'moon' : 'sun'} onClick={toggleDarkMode}>
-          {isDarkMode ? '🌘' : '🌔'}
-        </DarkThemeEmoji>
-      </Header>
-      <Body>{children}</Body>
-      <Footer>
-        <KeyFlash style={props}>{stringToFlash}</KeyFlash>
-        <GitHubLink href="https://github.com/NoahZinsmeister/noahzinsmeister.com">
-          <SVGIcon name={GITHUB} width="24px" fill={isDarkMode ? '#FFFFFF' : '#000000'} />
-        </GitHubLink>
-      </Footer>
-    </Root>
+    <div className="root">
+      <div className="header">
+        <Emoji
+          style={{ margin: '1rem' }}
+          emoji={isDarkMode ? '🌘' : '🌔'}
+          label={isDarkMode ? 'moon' : 'sun'}
+          onClick={toggleDarkMode}
+        />
+      </div>
+
+      <div className="body">{children}</div>
+
+      <div className="footer">
+        <Link style={{ margin: '1rem', lineHeight: 0 }} href="https://github.com/NoahZinsmeister/noahzinsmeister.com">
+          <SVGIcon name={GITHUB} width="24px" fill={theme.colors.text} />
+        </Link>
+      </div>
+
+      <style jsx>{`
+        .root {
+          display: flex;
+          flex-direction: column;
+          width: 100vw;
+          min-height: 100vh;
+        }
+
+        .header {
+          display: flex;
+          flex: 0 1 auto;
+          justify-content: flex-end;
+        }
+
+        .body {
+          display: flex;
+          flex-direction: column;
+          flex: 1 1 auto;
+          align-items: center;
+        }
+
+        .footer {
+          display: flex;
+          flex: 0 1 auto;
+          justify-content: flex-end;
+        }
+      `}</style>
+    </div>
   )
 }

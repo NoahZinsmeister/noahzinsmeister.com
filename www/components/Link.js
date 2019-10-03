@@ -1,25 +1,30 @@
-import React from 'react'
-import styled from 'styled-components'
-import { darken } from 'polished'
+import { darken, lighten } from 'polished'
 
-const A = styled.a`
-  text-decoration: none;
-  color: ${({ color, theme }) => color || theme.linkBlue};
-  transition: color 200ms ease-out;
+import useTheme from '../theme'
 
-  :hover {
-    cursor: pointer;
-  }
+export default function Link({ href, children, ...rest }) {
+  const theme = useTheme()
 
-  :active {
-    color: ${({ color, theme }) => darken(0.25, color || theme.linkBlue)};
-  }
-`
-
-export default function Link({ color, children, ...rest }) {
   return (
-    <A target="_blank" rel="noopener noreferrer" color={color} {...rest}>
-      {children}
-    </A>
+    <>
+      <a target="_blank" rel="noopener noreferrer" href={href} {...rest}>
+        {children}
+      </a>
+      <style jsx>{`
+        a {
+          text-decoration: none;
+          color: ${theme.colors.link};
+        }
+
+        a:hover {
+          cursor: pointer;
+          color: ${(theme.isDarkMode ? lighten : darken)(0.1, theme.colors.link)};
+        }
+
+        a:active {
+          color: ${(theme.isDarkMode ? lighten : darken)(0.25, theme.colors.link)};
+        }
+      `}</style>
+    </>
   )
 }
