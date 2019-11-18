@@ -44,11 +44,17 @@ export default class MyApp extends App {
       <>
         <Head>
           <title>Noah Zinsmeister</title>
+          <link href='https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap' rel='stylesheet' />
         </Head>
         <CookieContext darkModeInitial={isDarkModeInCookie}>
           <CookieContextUpdater />
           <AppFunctionComponent Component={Component} pageProps={pageProps} />
         </CookieContext>
+        <style jsx='true' global>{`
+          body {
+            font-family: 'Roboto Mono', sans-serif;
+          }
+        `}</style>
       </>
     )
   }
