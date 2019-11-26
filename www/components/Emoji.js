@@ -30,21 +30,17 @@ export default function Emoji({ emoji, label = 'emoji', onClick, ...rest }) {
       </span>
       <style jsx>{`
         span {
-          user-select: none;
+          ${onClick ? `user-select: none;` : ''}
           font-size: 24px;
           line-height: 24px;
         }
 
         span:hover {
-          ${!!onClick &&
-            `
-          cursor: pointer;`}
+          ${onClick ? `cursor: pointer;` : ''}
         }
 
         span:active:focus {
-          ${!!onClick &&
-            `
-            outline: none;`}
+          ${onClick ? `outline: none;` : ''}
         }
       `}</style>
     </>

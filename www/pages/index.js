@@ -48,9 +48,9 @@ function Bio() {
         {selected === SHORT ? (
           <p>
             I graduated from Columbia in 2016, where I studied economics and math. After a close call with an econ PhD I
-            became fascinated with cryptocurrencies, and have since gone fully down the rabbit hole. Right now I'm a
-            Senior Engineer at <Link href="https://uniswap.io/">Uniswap</Link>, a decentralized exchange built on
-            Ethereum.
+            became fascinated with cryptocurrencies, and have since gone fully down the rabbit hole. At the moment I
+            live in Williamsburg and work as a Senior Engineer at <Link href="https://uniswap.io/">Uniswap</Link>, a
+            decentralized digital asset exchange.
           </p>
         ) : (
           <p>
@@ -60,9 +60,9 @@ function Bio() {
             Hydrogen, where I wrote security grade smart contracts, co-authored{' '}
             <Link href="https://github.com/ethereum/EIPs/issues/1495">ERC-1484</Link> (a digital identity protocol), and
             developed open-source blockchain tooling. I'm now a Senior Engineer at{' '}
-            <Link href="https://uniswap.io/">Uniswap</Link>, a decentralized exchange protocol for trading
-            Ethereum-based assets. I also take <Link href="https://noahzinsmeisterphotography.com/">photos</Link>{' '}
-            sometimes.
+            <Link href="https://uniswap.io/">Uniswap</Link>. I also created and maintain{' '}
+            <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link> (a framework for building
+            dApps), and occasionally <Link href="https://noahzinsmeisterphotography.com/">take photos</Link>.
           </p>
         )}
       </div>
@@ -128,9 +128,9 @@ export default function Main() {
   return (
     <>
       <div>
-        <h2 className="title">
-          <Emoji emoji="👋🏻" label="wave" /> I'm Noah!
-        </h2>
+        <h1 className="title">
+          <Emoji emoji="👋🏻" label="wave" style={{ fontSize: 'inherit' }} /> I'm Noah!
+        </h1>
       </div>
 
       <div className="links">
