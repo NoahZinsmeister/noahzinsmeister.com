@@ -67,7 +67,7 @@ function Bio() {
           {Object.keys(VIEWS).map((k, i) => (
             <div key={k} className="view-selector">
               <Emoji
-                style={viewKey === i ? { textDecoration: 'underline', textUnderlinePosition: 'under' } : {}}
+                style={{ fontSize: viewKey === i ? '2.25rem' : '1.75rem' }}
                 emoji={VIEWS[k].emoji}
                 label={VIEWS[k].label}
                 onClick={() => setView(i)}
@@ -75,6 +75,7 @@ function Bio() {
             </div>
           ))}
         </div>
+        <hr style={{ margin: '1.25rem auto 1.25rem auto', border: '1px solid black', width: '50%' }} />
         {viewKey === 0 ? (
           <p>
             I graduated from Columbia in 2016, where I studied economics and math. After a close call with an econ PhD I
@@ -98,37 +99,41 @@ function Bio() {
           </p>
         ) : viewKey === 2 ? (
           <p>
-            <li>
-              <Link href="https://www.youtube.com/watch?v=9ih_J223Hrg">
-                Building Modern dApps in React with web3-react
-              </Link>{' '}
-              (<i>Talk</i>, 6/25/2019)
-            </li>
-            <li>
-              <Link href="https://www.youtube.com/watch?v=wSUwFVp4Fn4&t=25589">DeFi's Real vs Expected Users</Link> (
-              <i>Panel</i>, 10/7/2019)
-            </li>
+            <ul>
+              <li>
+                <Link href="https://www.youtube.com/watch?v=9ih_J223Hrg">
+                  Building Modern dApps in React with web3-react
+                </Link>{' '}
+                (<i>Talk</i>, 6/25/2019)
+              </li>
+              <li>
+                <Link href="https://www.youtube.com/watch?v=wSUwFVp4Fn4&t=25589">DeFi's Real vs Expected Users</Link> (
+                <i>Panel</i>, 10/7/2019)
+              </li>
+            </ul>
           </p>
         ) : (
           <p>
-            <li>
-              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
-                Regulatory Incentives and Quarter-End Dynamics in the Repo Market
-              </Link>{' '}
-              (<i>Liberty Street Economics</i>, 8/7/2017)
-            </li>
-            <li>
-              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
-                Excess Funding Capacity in Tri-Party Repo
-              </Link>{' '}
-              (<i>Liberty Street Economics</i>, 10/2/2017)
-            </li>
-            <li>
-              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
-                The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
-              </Link>{' '}
-              (<i>Liberty Street Economics</i>, 10/4/2017)
-            </li>
+            <ul>
+              <li>
+                <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
+                  Regulatory Incentives and Quarter-End Dynamics in the Repo Market
+                </Link>{' '}
+                (<i>Liberty Street Economics</i>, 8/7/2017)
+              </li>
+              <li>
+                <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
+                  Excess Funding Capacity in Tri-Party Repo
+                </Link>{' '}
+                (<i>Liberty Street Economics</i>, 10/2/2017)
+              </li>
+              <li>
+                <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
+                  The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
+                </Link>{' '}
+                (<i>Liberty Street Economics</i>, 10/4/2017)
+              </li>
+            </ul>
           </p>
         )}
       </div>
@@ -144,7 +149,6 @@ function Bio() {
           display: flex;
           flex-direction: row;
           justify-content: center;
-          margin-bottom: 1rem;
 
           margin-top: -1rem;
           margin-right: -2rem;
@@ -152,11 +156,7 @@ function Bio() {
 
         .view-selectors .view-selector {
           margin-top: 1rem;
-          margin-right: 2em;
-        }
-
-        .selected {
-          margin: 20rem;
+          margin-right: 2rem;
         }
 
         p {
@@ -224,7 +224,7 @@ export default function Main() {
       <style jsx>{`
         .title {
           margin-top: 5vh;
-          margin-bottom: 2rem;
+          margin-bottom: 1.5rem;
         }
 
         .links {
