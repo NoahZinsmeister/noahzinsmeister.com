@@ -5,6 +5,7 @@ import copy from 'copy-to-clipboard'
 import Emoji from '../components/Emoji'
 import Link from '../components/Link'
 import { useBodyKeyDown } from '../hooks'
+import useTheme from '../theme'
 
 const VIEWS = {
   0: {
@@ -31,6 +32,7 @@ const VIEWS = {
 
 function Bio() {
   const router = useRouter()
+  const theme = useTheme()
 
   const validView = Object.keys(VIEWS)
     .map(k => VIEWS[k].view)
@@ -75,7 +77,14 @@ function Bio() {
             </div>
           ))}
         </div>
-        <hr style={{ margin: '1.25rem auto 1.25rem auto', border: '1px solid black', width: '50%' }} />
+        <hr
+          style={{
+            margin: '1.25rem auto 1.25rem auto',
+            border: '1px solid',
+            width: '50%',
+            borderColor: theme.isDarkMode ? theme.colors.white : theme.colors.black
+          }}
+        />
         {viewKey === 0 ? (
           <p>
             I graduated from Columbia in 2016, where I studied economics and math. After a close call with an econ PhD I
@@ -149,6 +158,7 @@ function Bio() {
           display: flex;
           flex-direction: row;
           justify-content: center;
+          align-items: center;
 
           margin-top: -1rem;
           margin-right: -2rem;
