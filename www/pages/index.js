@@ -87,9 +87,9 @@ function Bio() {
         />
         {viewKey === 0 ? (
           <p>
-            I graduated from Columbia in 2016, where I studied economics and math. After a close call with an econ PhD I
-            became fascinated with cryptocurrencies and have since gone fully down the rabbit hole. At the moment, I
-            live in Williamsburg and work as a Senior Engineer at <Link href="https://uniswap.io/">Uniswap</Link>, a
+            I graduated from Columbia in 2016 with a degree in economics and math. After a close call with an econ PhD,
+            I became fascinated with cryptocurrencies and have since gone fully down the rabbit hole. At the moment I
+            live in Williamsburg and work as Engineering Lead at <Link href="https://uniswap.io">Uniswap</Link>, a
             decentralized digital asset exchange.
           </p>
         ) : viewKey === 1 ? (
@@ -99,12 +99,13 @@ function Bio() {
             Studies division. My long-standing interest in cryptocurrencies eventually led me to an engineering role at
             Hydrogen, where I wrote security grade smart contracts, co-authored{' '}
             <Link href="https://github.com/ethereum/EIPs/issues/1495">ERC-1484</Link> (a digital identity protocol), and
-            developed open-source blockchain tooling. I'm now a Senior Engineer at{' '}
-            <Link href="https://uniswap.io/">Uniswap</Link>.
+            developed open-source blockchain tooling. I'm now Engineering Lead at{' '}
+            <Link href="https://uniswap.io">Uniswap</Link>.
             <br />
             <br />I also created and maintain{' '}
             <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link> (a framework for building
-            dApps), and occasionally <Link href="https://photography.noahzinsmeister.com/">take photos</Link>.
+            decentralized applications), and occasionally{' '}
+            <Link href="https://photography.noahzinsmeister.com/">take photos</Link>.
           </p>
         ) : viewKey === 2 ? (
           <p>
