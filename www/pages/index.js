@@ -104,7 +104,7 @@ function Bio() {
             <br />
             <br />I also created and maintain{' '}
             <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link> (a framework for building
-            dApps), and occasionally <Link href="https://noahzinsmeisterphotography.com/">take photos</Link>.
+            dApps), and occasionally <Link href="https://photography.noahzinsmeister.com/">take photos</Link>.
           </p>
         ) : viewKey === 2 ? (
           <p>
