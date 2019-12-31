@@ -1,7 +1,5 @@
 {
   "version": 2,
-  "name": "noahzinsmeister.com",
-  "alias": "noahzinsmeister.com",
   "builds": [{ "src": "www/next.config.js", "use": "@now/next" }],
-  "routes": [{ "src": "/(.*)", "dest": "/www/$1" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/www/$1" }]
 }
