@@ -86,14 +86,14 @@ function Bio() {
           }}
         />
         {viewKey === 0 ? (
-          <p>
+          <p className="content">
             I graduated from Columbia in 2016 with a degree in economics and math. After a close call with an econ PhD,
             I became fascinated with cryptocurrencies and have since gone fully down the rabbit hole. At the moment I
             live in Williamsburg and work as Engineering Lead at <Link href="https://uniswap.io">Uniswap</Link>, a
             decentralized digital asset exchange.
           </p>
         ) : viewKey === 1 ? (
-          <p>
+          <p className="content">
             I have a B.A. in Economics-Mathematics from Columbia University. After graduating I spent nearly two years
             at the Federal Reserve Bank of New York working as a Senior Research Analyst in the Money and Payments
             Studies division. My long-standing interest in cryptocurrencies eventually led me to an engineering role at
@@ -108,43 +108,39 @@ function Bio() {
             <Link href="https://photography.noahzinsmeister.com/">take photos</Link>.
           </p>
         ) : viewKey === 2 ? (
-          <p>
-            <ul>
-              <li>
-                <Link href="https://www.youtube.com/watch?v=9ih_J223Hrg">
-                  Building Modern dApps in React with web3-react
-                </Link>{' '}
-                (<i>Talk</i>, 6/25/2019)
-              </li>
-              <li>
-                <Link href="https://www.youtube.com/watch?v=wSUwFVp4Fn4&t=25589">DeFi's Real vs Expected Users</Link> (
-                <i>Panel</i>, 10/7/2019)
-              </li>
-            </ul>
-          </p>
+          <ul className="content">
+            <li>
+              <Link href="https://www.youtube.com/watch?v=9ih_J223Hrg">
+                Building Modern dApps in React with web3-react
+              </Link>{' '}
+              (<i>Talk</i>, 6/25/2019)
+            </li>
+            <li>
+              <Link href="https://www.youtube.com/watch?v=wSUwFVp4Fn4&t=25589">DeFi's Real vs Expected Users</Link> (
+              <i>Panel</i>, 10/7/2019)
+            </li>
+          </ul>
         ) : (
-          <p>
-            <ul>
-              <li>
-                <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
-                  Regulatory Incentives and Quarter-End Dynamics in the Repo Market
-                </Link>{' '}
-                (<i>Liberty Street Economics</i>, 8/7/2017)
-              </li>
-              <li>
-                <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
-                  Excess Funding Capacity in Tri-Party Repo
-                </Link>{' '}
-                (<i>Liberty Street Economics</i>, 10/2/2017)
-              </li>
-              <li>
-                <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
-                  The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
-                </Link>{' '}
-                (<i>Liberty Street Economics</i>, 10/4/2017)
-              </li>
-            </ul>
-          </p>
+          <ul className="content">
+            <li>
+              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
+                Regulatory Incentives and Quarter-End Dynamics in the Repo Market
+              </Link>{' '}
+              (<i>Liberty Street Economics</i>, 8/7/2017)
+            </li>
+            <li>
+              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
+                Excess Funding Capacity in Tri-Party Repo
+              </Link>{' '}
+              (<i>Liberty Street Economics</i>, 10/2/2017)
+            </li>
+            <li>
+              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
+                The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
+              </Link>{' '}
+              (<i>Liberty Street Economics</i>, 10/4/2017)
+            </li>
+          </ul>
         )}
       </div>
 
@@ -170,7 +166,7 @@ function Bio() {
           margin-right: 2rem;
         }
 
-        p {
+        .content {
           word-wrap: break-word;
           margin: 0 2rem 0 2rem;
           text-align: justify;
