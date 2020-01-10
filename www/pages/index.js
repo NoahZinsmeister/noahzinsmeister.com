@@ -1,175 +1,123 @@
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { resolve } from 'styled-jsx/css'
 import copy from 'copy-to-clipboard'
 
 import Emoji from '../components/Emoji'
 import Link from '../components/Link'
 import { useBodyKeyDown } from '../hooks'
-import useTheme from '../theme'
 
-const VIEWS = {
-  0: {
-    emoji: '⬇️',
-    label: 'short-description',
-    view: undefined
-  },
-  1: {
-    emoji: '⏬',
-    label: 'long-description',
-    view: 'long-description'
-  },
-  2: {
-    emoji: '📺',
-    label: 'videos',
-    view: 'videos'
-  },
-  3: {
-    emoji: '📝',
-    label: 'articles',
-    view: 'articles'
-  }
+function getUniswapLinkStyles() {
+  return resolve`
+    a:hover {
+      color: #dc6be5 !important;
+    }
+  `
 }
 
-function Bio() {
-  const router = useRouter()
-  const theme = useTheme()
-
-  const validView = Object.keys(VIEWS)
-    .map(k => VIEWS[k].view)
-    .includes(router.query.view)
-  useEffect(() => {
-    if (!validView) {
-      router.push({ pathname: '/', query: {} }, undefined, { shallow: true })
-    }
-  })
-
-  const viewKey = validView ? Number(Object.keys(VIEWS).filter(k => VIEWS[k].view === router.query.view)[0]) : 0
-
-  function setView(index) {
-    router.push({ pathname: '/', query: VIEWS[index].view ? { view: VIEWS[index].view } : {} }, undefined, {
-      shallow: true
-    })
-  }
-
-  function next() {
-    setView((viewKey + 1) % Object.keys(VIEWS).length)
-  }
-
-  function previous() {
-    setView(viewKey - 1 < 0 ? Object.keys(VIEWS).length - 1 : viewKey - 1)
-  }
-
-  useBodyKeyDown('ArrowRight', next, viewKey === Object.keys(VIEWS).length - 1)
-  useBodyKeyDown('ArrowLeft', previous, viewKey === 0)
+function Content() {
+  const [E, setE] = useState('E')
+  const { className, styles } = getUniswapLinkStyles()
 
   return (
     <>
-      <div className="wrapper">
-        <div className="view-selectors">
-          {Object.keys(VIEWS).map((k, i) => (
-            <div key={k} className="view-selector">
-              <Emoji
-                style={{ fontSize: viewKey === i ? '2.25rem' : '1.75rem' }}
-                emoji={VIEWS[k].emoji}
-                label={VIEWS[k].label}
-                onClick={() => setView(i)}
-              />
-            </div>
-          ))}
-        </div>
-        <hr
-          style={{
-            margin: '1.25rem auto 1.25rem auto',
-            border: '1px solid',
-            width: '50%',
-            borderColor: theme.isDarkMode ? theme.colors.white : theme.colors.black
-          }}
-        />
-        {viewKey === 0 ? (
-          <p className="content">
-            I graduated from Columbia in 2016 with a degree in economics and math. After a close call with an econ PhD,
-            I became fascinated with cryptocurrencies and have since gone fully down the rabbit hole. At the moment I
-            live in Williamsburg and work as Engineering Lead at <Link href="https://uniswap.io">Uniswap</Link>, a
-            decentralized digital asset exchange.
-          </p>
-        ) : viewKey === 1 ? (
-          <p className="content">
-            I have a B.A. in Economics-Mathematics from Columbia University. After graduating I spent nearly two years
-            at the Federal Reserve Bank of New York working as a Senior Research Analyst in the Money and Payments
-            Studies division. My long-standing interest in cryptocurrencies eventually led me to an engineering role at
-            Hydrogen, where I wrote security grade smart contracts, co-authored{' '}
-            <Link href="https://github.com/ethereum/EIPs/issues/1495">ERC-1484</Link> (a digital identity protocol), and
-            developed open-source blockchain tooling. I'm now Engineering Lead at{' '}
-            <Link href="https://uniswap.io">Uniswap</Link>.
+      <div className="section">
+        <Emoji emoji={'🎙'} label={'biography'} />
+        <p className="text">
+          I graduated from <span className="columbia">Columbia</span> in 2016 with a B.A. in Economics-Mathematics.
+          After a close call with a PhD, I became fascinated with cryptocurrencies and have since gone fully down the
+          rabbit hole. At the moment I live in Williamsburg and work as Engineering Lead at{' '}
+          <Link className={className} href="https://uniswap.io">
+            Uniswap
+          </Link>
+          {styles}, a decentralized digital asset exchange built on{' '}
+          <span
+            onMouseEnter={() => {
+              setE('Ξ')
+            }}
+            onMouseLeave={() => {
+              setE('E')
+            }}
+          >
+            {E}thereum
+          </span>
+          . I also maintain <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link>, a framework I
+          created for building blockchain applications. In my spare time I enjoy skiing, games, tennis and{' '}
+          <Link href="https://photography.noahzinsmeister.com/">taking photos</Link>.
+        </p>
+      </div>
+      <div className="section">
+        <Emoji emoji={'🎬'} label={'videos'} />
+        <ul className="list">
+          <li>
+            <Link href="https://www.youtube.com/watch?v=9ih_J223Hrg">
+              Building Modern dApps in React with web3-react
+            </Link>{' '}
             <br />
-            <br />I also created and maintain{' '}
-            <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link> (a framework for building
-            decentralized applications), and occasionally{' '}
-            <Link href="https://photography.noahzinsmeister.com/">take photos</Link>.
-          </p>
-        ) : viewKey === 2 ? (
-          <ul className="content">
-            <li>
-              <Link href="https://www.youtube.com/watch?v=9ih_J223Hrg">
-                Building Modern dApps in React with web3-react
-              </Link>{' '}
-              (<i>Talk</i>, 6/25/2019)
-            </li>
-            <li>
-              <Link href="https://www.youtube.com/watch?v=wSUwFVp4Fn4&t=25589">DeFi's Real vs Expected Users</Link> (
-              <i>Panel</i>, 10/7/2019)
-            </li>
-          </ul>
-        ) : (
-          <ul className="content">
-            <li>
-              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
-                Regulatory Incentives and Quarter-End Dynamics in the Repo Market
-              </Link>{' '}
-              (<i>Liberty Street Economics</i>, 8/7/2017)
-            </li>
-            <li>
-              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
-                Excess Funding Capacity in Tri-Party Repo
-              </Link>{' '}
-              (<i>Liberty Street Economics</i>, 10/2/2017)
-            </li>
-            <li>
-              <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
-                The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
-              </Link>{' '}
-              (<i>Liberty Street Economics</i>, 10/4/2017)
-            </li>
-          </ul>
-        )}
+            <code>2019-06-25</code>
+          </li>
+          <li>
+            <Link href="https://www.youtube.com/watch?v=wSUwFVp4Fn4&t=25589">DeFi's Real vs Expected Users</Link>
+            <br />
+            <code>2019-10-07</code>
+          </li>
+        </ul>
+      </div>
+      <div className="section">
+        <Emoji emoji={'✒️'} label={'articles'} />
+        <ul className="list">
+          <li>
+            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
+              Regulatory Incentives and Quarter-End Dynamics in the Repo Market
+            </Link>
+            <br />
+            <code>2017-08-07</code>
+          </li>
+          <li>
+            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
+              Excess Funding Capacity in Tri-Party Repo
+            </Link>
+            <br />
+            <code>2017-10-02</code>
+          </li>
+          <li>
+            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
+              The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
+            </Link>
+            <br />
+            <code>2017-10-04</code>
+          </li>
+        </ul>
       </div>
 
       <style jsx>{`
-        .wrapper {
-          margin-top: 4rem;
-          max-width: 50rem;
-          margin-bottom: 5vh;
-        }
-
-        .view-selectors {
+        .section {
           display: flex;
           flex-direction: row;
-          justify-content: center;
-          align-items: center;
-
-          margin-top: -1rem;
-          margin-right: -2rem;
+          max-width: 45rem;
+          margin-bottom: 2rem;
         }
 
-        .view-selectors .view-selector {
-          margin-top: 1rem;
-          margin-right: 2rem;
-        }
-
-        .content {
+        .text {
           word-wrap: break-word;
           margin: 0 2rem 0 2rem;
           text-align: justify;
+          list-style-position: inside;
+        }
+
+        .columbia:hover {
+          color: #b9d9eb;
+        }
+
+        .uniswap {
+          color: #dc6be5;
+        }
+
+        .list {
+          margin: 0 2rem 0 2rem;
+          list-style-type: none;
+        }
+        .list li :not(:last-child) {
+          margin-bottom: 0.5rem;
         }
       `}</style>
     </>
@@ -200,25 +148,17 @@ export default function Main() {
 
   return (
     <>
-      <div>
-        <h1 className="title">
-          <Emoji emoji="👋🏻" label="wave" style={{ fontSize: 'inherit' }} /> I'm Noah!
-        </h1>
-      </div>
-
       <div className="links">
         <div className="link-wrapper">
           <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
         </div>
-
         <div className="link-wrapper">
           <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
         </div>
-
         <div className="link-wrapper">
           <Link href="mailto:noahwz@gmail.com">Email</Link>
           <Emoji
-            style={{ marginLeft: '.5rem' }}
+            style={{ fontSize: '1.25rem', marginLeft: '.5rem' }}
             emoji={copied ? '👍🏻' : '📋'}
             label={copied ? 'copied' : 'copy'}
             onClick={!copied && copyEmail}
@@ -226,24 +166,20 @@ export default function Main() {
         </div>
       </div>
 
-      <Bio />
+      <Content />
 
       <style jsx>{`
-        .title {
-          margin-top: 5vh;
-          margin-bottom: 1.5rem;
-        }
-
         .links {
           display: flex;
-          margin-top: -1rem;
-          margin-right: -1rem;
+          margin-top: -2rem;
+          margin-right: -0.75rem;
+          margin-bottom: 4rem;
         }
 
-        .links .link-wrapper {
+        .link-wrapper {
           display: flex;
           margin-top: 1rem;
-          margin-right: 1rem;
+          margin-right: 0.75rem;
         }
       `}</style>
     </>

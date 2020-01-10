@@ -16,61 +16,6 @@ export default class MyDocument extends Document {
           <Main />
           <NextScript />
         </body>
-        <style jsx global>
-          {`
-            /* Box sizing rules */
-            *,
-            *::before,
-            *::after {
-              box-sizing: border-box;
-            }
-
-            /* global outline width */
-            * {
-              outline-width: thin;
-            }
-
-            /* Remove default padding */
-            ul[class],
-            ol[class] {
-              padding: 0;
-            }
-
-            /* Remove default margin */
-            body,
-            h1,
-            h2,
-            h3,
-            h4,
-            p,
-            ul[class],
-            ol[class],
-            li,
-            figure,
-            figcaption,
-            blockquote,
-            dl,
-            dd {
-              margin: 0;
-            }
-
-            /* Set core body defaults */
-            body {
-              min-height: 100vh;
-              scroll-behavior: smooth;
-              text-rendering: optimizeSpeed;
-              line-height: 1.5;
-            }
-
-            /* Inherit fonts for inputs and buttons */
-            input,
-            button,
-            textarea,
-            select {
-              font: inherit;
-            }
-          `}
-        </style>
       </Html>
     )
   }
