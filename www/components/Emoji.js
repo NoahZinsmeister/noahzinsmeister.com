@@ -1,6 +1,6 @@
 import { useRef } from 'react'
 
-export default function Emoji({ emoji, label = 'emoji', onClick, ...rest }) {
+export default function Emoji({ emoji, label = 'emoji', size = '24px', onClick, ...rest }) {
   const ref = useRef()
 
   function wrappedOnClick(event) {
@@ -31,8 +31,9 @@ export default function Emoji({ emoji, label = 'emoji', onClick, ...rest }) {
       <style jsx>{`
         span {
           ${onClick ? `user-select: none;` : ''}
-          font-size: 24px;
-          line-height: 24px;
+          font-size: ${size};
+          line-height: ${size};
+          width: ${size};
         }
 
         span:hover {
