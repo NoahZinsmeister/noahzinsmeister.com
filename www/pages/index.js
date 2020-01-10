@@ -158,7 +158,8 @@ export default function Main() {
         <div className="link-wrapper">
           <Link href="mailto:noahwz@gmail.com">Email</Link>
           <Emoji
-            style={{ fontSize: '1.25rem', marginLeft: '.5rem' }}
+            style={{ marginLeft: '.5rem' }}
+            size={'1.25rem'}
             emoji={copied ? '👍🏻' : '📋'}
             label={copied ? 'copied' : 'copy'}
             onClick={!copied && copyEmail}
