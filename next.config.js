@@ -4,6 +4,5 @@ module.exports = phase => ({
   env: {
     ENVIRONMENT: phase === PHASE_DEVELOPMENT_SERVER ? 'development' : 'production'
   },
-  target: 'serverless',
   reactStrictMode: true
 })

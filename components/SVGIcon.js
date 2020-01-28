@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import { useRef } from 'react'
 
 const VIEW_BOX = 'VIEWBOX'
 const PATH = 'PATH'

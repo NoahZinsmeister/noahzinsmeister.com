@@ -5,6 +5,8 @@ import useTheme from '../theme'
 export default function Link({ href, children, ...rest }) {
   const theme = useTheme()
 
+  console.log(theme.colors.link)
+
   return (
     <>
       <a target="_blank" rel="noopener noreferrer" href={href} {...rest}>

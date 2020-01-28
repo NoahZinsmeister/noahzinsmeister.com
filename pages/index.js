@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { resolve } from 'styled-jsx/css'
 import copy from 'copy-to-clipboard'
 
+import { useBodyKeyDown } from '../hooks'
 import Emoji from '../components/Emoji'
 import Link from '../components/Link'
-import { useBodyKeyDown } from '../hooks'
 
 function getUniswapLinkStyles() {
   return resolve`

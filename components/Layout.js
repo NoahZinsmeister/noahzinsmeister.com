@@ -1,9 +1,9 @@
 import { useBodyKeyDown } from '../hooks'
-import { useDarkModeManager } from '../contexts/Cookie'
+import useTheme from '../theme'
+import { useDarkModeManager } from '../contexts/LocalStorage'
 import SVGIcon, { GITHUB } from './SVGIcon'
 import Emoji from './Emoji'
 import Link from './Link'
-import useTheme from '../theme'
 
 export default function Layout({ children }) {
   const [isDarkMode, toggleDarkMode] = useDarkModeManager()

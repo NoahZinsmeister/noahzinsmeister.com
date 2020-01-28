@@ -1,4 +1,4 @@
-import { useDarkModeManager } from '../contexts/Cookie'
+import { useDarkModeManager } from '../contexts/LocalStorage'
 
 const LIGHT_MODE = false
 const DARK_MODE = true
@@ -6,15 +6,16 @@ const DARK_MODE = true
 // define theme colors
 const WHITE = '#FFFFFF'
 const BLACK = '#000000'
-const BACKGROUNDS = {
+
+const BACKGROUND = {
   [LIGHT_MODE]: WHITE,
   [DARK_MODE]: BLACK
 }
-const TEXTS = {
+const TEXT = {
   [LIGHT_MODE]: BLACK,
   [DARK_MODE]: WHITE
 }
-const LINKS = {
+const LINK = {
   [LIGHT_MODE]: '#0000EE',
   [DARK_MODE]: '#20C20E'
 }
@@ -25,9 +26,9 @@ export default function useTheme() {
   return {
     isDarkMode,
     colors: {
-      background: BACKGROUNDS[isDarkMode],
-      text: TEXTS[isDarkMode],
-      link: LINKS[isDarkMode]
+      background: BACKGROUND[isDarkMode],
+      text: TEXT[isDarkMode],
+      link: LINK[isDarkMode]
     }
   }
 }
