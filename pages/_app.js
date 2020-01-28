@@ -6,11 +6,18 @@ import useTheme from '../theme'
 import Layout from '../components/Layout'
 
 import '../styles.css'
+import { useEffect, useState } from 'react'
 
 function FunctionalRoot({ Component }) {
   const theme = useTheme()
 
-  return (
+  // prevents FOUC issues with static assets + dark mode
+  const [painted, setPainted] = useState(false)
+  useEffect(() => {
+    setPainted(true)
+  }, [])
+
+  return !painted ? null : (
     <>
       <Head>
         <link rel="shortcut icon" href={`./favicon-${theme.isDarkMode ? 'dark' : 'light'}.ico`} />
