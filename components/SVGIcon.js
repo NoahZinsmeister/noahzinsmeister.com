@@ -66,6 +66,7 @@ export default function SVGIcon({ name, width, fill, onClick, ...rest }) {
       >
         {path}
       </svg>
+
       <style jsx>{`
         svg {
           user-select: none;

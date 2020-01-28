@@ -1,14 +1,4 @@
-import { createContext, useContext, useReducer, useMemo, useCallback, useEffect } from 'react'
-
-function encode(o) {
-  const stringified = JSON.stringify(o || {})
-  return Buffer.from(stringified).toString('base64')
-}
-
-function decode(s) {
-  const stringified = Buffer.from(s || JSON.stringify({}), 'base64').toString()
-  return JSON.parse(stringified)
-}
+import { createContext, useContext, useReducer, useMemo, useCallback, useEffect, useLayoutEffect } from 'react'
 
 // top-level key
 const KEY = 'NOAHZINSMEISTER.COM'
@@ -17,6 +7,7 @@ const KEY = 'NOAHZINSMEISTER.COM'
 const DARK_MODE = 'DARK_MODE'
 
 // action types
+const INITIALIZE = 'INITIALIZE'
 const CHANGE_DARK_MODE = 'CHANGE_DARK_MODE'
 
 const LocalStorageContext = createContext([{}, {}])
@@ -27,6 +18,12 @@ function useLocalStorageContext() {
 
 function reducer(state, { type, payload }) {
   switch (type) {
+    case INITIALIZE: {
+      return {
+        ...state,
+        ...payload.state
+      }
+    }
     case CHANGE_DARK_MODE: {
       const { isDarkMode } = payload
       return {
@@ -40,35 +37,39 @@ function reducer(state, { type, payload }) {
   }
 }
 
-function init() {
-  const fallback = { [DARK_MODE]: false }
-
-  try {
-    return { ...fallback, ...decode(window.localStorage.getItem(KEY)) }
-  } catch {
-    return fallback
-  }
-}
-
 export default function Provider({ children }) {
-  const [state, dispatch] = useReducer(reducer, undefined, init)
+  const [state, dispatch] = useReducer(reducer, { [DARK_MODE]: false })
+
+  const initialize = useCallback(state => {
+    dispatch({ type: INITIALIZE, payload: { state } })
+  }, [])
 
   const changeDarkMode = useCallback(isDarkMode => {
     dispatch({ type: CHANGE_DARK_MODE, payload: { isDarkMode } })
   }, [])
 
   return (
-    <LocalStorageContext.Provider value={useMemo(() => [state, { changeDarkMode }], [state, changeDarkMode])}>
+    <LocalStorageContext.Provider
+      value={useMemo(() => [state, { initialize, changeDarkMode }], [state, initialize, changeDarkMode])}
+    >
       {children}
     </LocalStorageContext.Provider>
   )
 }
 
 export function Updater() {
-  const [state] = useLocalStorageContext()
+  const [state, { initialize }] = useLocalStorageContext()
+
+  useLayoutEffect(() => {
+    try {
+      const existingState = JSON.parse(window.localStorage.getItem(KEY)) || {}
+      window.localStorage.clear()
+      initialize(existingState)
+    } catch {}
+  }, [initialize])
 
   useEffect(() => {
-    window.localStorage.setItem(KEY, encode(state))
+    window.localStorage.setItem(KEY, JSON.stringify(state))
   })
 
   return null

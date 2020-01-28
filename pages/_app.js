@@ -7,7 +7,7 @@ import Layout from '../components/Layout'
 
 import './styles.css'
 
-function MyApp({ Component }) {
+function FunctionalRoot({ Component }) {
   const theme = useTheme()
 
   return (
@@ -28,7 +28,7 @@ function MyApp({ Component }) {
   )
 }
 
-export default class extends App {
+export default class Root extends App {
   render() {
     const { Component } = this.props
 
@@ -41,7 +41,7 @@ export default class extends App {
 
         <LocalStorageContext>
           <LocalStorageUpdater />
-          <MyApp Component={Component} />
+          <FunctionalRoot Component={Component} />
         </LocalStorageContext>
       </>
     )

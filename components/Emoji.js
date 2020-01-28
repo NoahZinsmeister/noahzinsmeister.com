@@ -28,6 +28,7 @@ export default function Emoji({ emoji, label = 'emoji', size = '24px', onClick, 
       >
         {emoji}
       </span>
+
       <style jsx>{`
         span {
           ${onClick ? `user-select: none;` : ''}
