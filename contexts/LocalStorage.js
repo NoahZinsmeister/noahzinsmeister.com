@@ -48,6 +48,12 @@ export default function Provider({ children }) {
     dispatch({ type: CHANGE_DARK_MODE, payload: { isDarkMode } })
   }, [])
 
+  useLayoutEffect(() => {
+    try {
+      initialize(JSON.parse(window.localStorage.getItem(KEY)) || {})
+    } catch {}
+  }, [initialize])
+
   return (
     <LocalStorageContext.Provider
       value={useMemo(() => [state, { initialize, changeDarkMode }], [state, initialize, changeDarkMode])}
@@ -58,15 +64,7 @@ export default function Provider({ children }) {
 }
 
 export function Updater() {
-  const [state, { initialize }] = useLocalStorageContext()
-
-  useLayoutEffect(() => {
-    try {
-      const existingState = JSON.parse(window.localStorage.getItem(KEY)) || {}
-      window.localStorage.clear()
-      initialize(existingState)
-    } catch {}
-  }, [initialize])
+  const [state] = useLocalStorageContext()
 
   useEffect(() => {
     window.localStorage.setItem(KEY, JSON.stringify(state))
