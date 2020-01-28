@@ -5,13 +5,17 @@ import LocalStorageContext, { Updater as LocalStorageUpdater } from '../contexts
 import useTheme from '../theme'
 import Layout from '../components/Layout'
 
-import './styles.css'
+import '../styles.css'
 
 function FunctionalRoot({ Component }) {
   const theme = useTheme()
 
   return (
     <>
+      <Head>
+        <link rel="shortcut icon" href={`/favicon-${theme.isDarkMode ? 'dark' : 'light'}.ico`} />
+      </Head>
+
       <Layout>
         <Component />
       </Layout>

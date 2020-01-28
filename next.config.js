@@ -1,3 +1,5 @@
 module.exports = {
-  reactStrictMode: true
+  reactStrictMode: true,
+  target: 'serverless',
+  assetPrefix: '.'
 }
