@@ -13,7 +13,7 @@ function FunctionalRoot({ Component }) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href={`/favicon-${theme.isDarkMode ? 'dark' : 'light'}.ico`} />
+        <link rel="shortcut icon" href={`./favicon-${theme.isDarkMode ? 'dark' : 'light'}.ico`} />
       </Head>
 
       <Layout>
