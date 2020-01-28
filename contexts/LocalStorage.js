@@ -7,7 +7,6 @@ const KEY = 'NOAHZINSMEISTER.COM'
 const DARK_MODE = 'DARK_MODE'
 
 // action types
-const INITIALIZE = 'INITIALIZE'
 const CHANGE_DARK_MODE = 'CHANGE_DARK_MODE'
 
 const LocalStorageContext = createContext([{}, {}])
@@ -16,14 +15,17 @@ function useLocalStorageContext() {
   return useContext(LocalStorageContext)
 }
 
+// this is ok because our site is static
+function init(state) {
+  try {
+    return { ...state, ...JSON.parse(window.localStorage.getItem(KEY)) }
+  } catch {
+    return state
+  }
+}
+
 function reducer(state, { type, payload }) {
   switch (type) {
-    case INITIALIZE: {
-      return {
-        ...state,
-        ...payload.state
-      }
-    }
     case CHANGE_DARK_MODE: {
       const { isDarkMode } = payload
       return {
@@ -38,26 +40,14 @@ function reducer(state, { type, payload }) {
 }
 
 export default function Provider({ children }) {
-  const [state, dispatch] = useReducer(reducer, { [DARK_MODE]: false })
-
-  const initialize = useCallback(state => {
-    dispatch({ type: INITIALIZE, payload: { state } })
-  }, [])
+  const [state, dispatch] = useReducer(reducer, { [DARK_MODE]: false }, init)
 
   const changeDarkMode = useCallback(isDarkMode => {
     dispatch({ type: CHANGE_DARK_MODE, payload: { isDarkMode } })
   }, [])
 
-  useLayoutEffect(() => {
-    try {
-      initialize(JSON.parse(window.localStorage.getItem(KEY)) || {})
-    } catch {}
-  }, [initialize])
-
   return (
-    <LocalStorageContext.Provider
-      value={useMemo(() => [state, { initialize, changeDarkMode }], [state, initialize, changeDarkMode])}
-    >
+    <LocalStorageContext.Provider value={useMemo(() => [state, { changeDarkMode }], [state, changeDarkMode])}>
       {children}
     </LocalStorageContext.Provider>
   )
