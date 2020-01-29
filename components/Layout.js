@@ -5,6 +5,8 @@ import SVGIcon, { GITHUB } from './SVGIcon'
 import Emoji from './Emoji'
 import Link from './Link'
 
+const IPFS = process.env.IPFS === 'true'
+
 export default function Layout({ children }) {
   const [isDarkMode, toggleDarkMode] = useDarkModeManager()
   const theme = useTheme()
@@ -25,6 +27,12 @@ export default function Layout({ children }) {
       <div className="body">{children}</div>
 
       <div className="footer">
+        {IPFS && (
+          <Link href="https://ipfs.io" title="Served over IPFS">
+            <img className="ipfs" src={`./ipfs-${isDarkMode ? 'light' : 'dark'}.png`} alt="Served over IPFS" />
+          </Link>
+        )}
+
         <Link style={{ lineHeight: 0 }} href="https://github.com/NoahZinsmeister/noahzinsmeister.com">
           <SVGIcon name={GITHUB} width="24px" fill={theme.colors.text} />
         </Link>
@@ -56,8 +64,12 @@ export default function Layout({ children }) {
         .footer {
           display: flex;
           flex: 0 1 auto;
-          justify-content: flex-end;
+          justify-content: ${IPFS ? 'space-between' : 'flex-end'};
           padding: 2rem;
+        }
+
+        .ipfs {
+          height: 24px;
         }
       `}</style>
     </div>

@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "rimraf .next out && next build && next export",
+    "build-ipfs": "rimraf .next out && IPFS=true next build && next export",
     "start": "next start"
   },
   "dependencies": {

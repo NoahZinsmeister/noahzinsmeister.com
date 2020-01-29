@@ -1,5 +1,8 @@
 module.exports = {
   reactStrictMode: true,
   target: 'serverless',
-  assetPrefix: '.'
+  assetPrefix: '.',
+  env: {
+    IPFS: process.env.IPFS
+  }
 }
