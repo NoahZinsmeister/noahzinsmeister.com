@@ -1,4 +1,4 @@
-const path = require('path')
+import path from 'path'
 const request = require('request-promise-native')
 const pinata = require('@pinata/sdk')(process.env.PINATA_API_KEY, process.env.PINATA_SECRET_API_KEY)
 
