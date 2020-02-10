@@ -31,3 +31,7 @@ jobs:
       - run: yarn build-ipfs
 
       - run: node ipfs-deploy.ts
+        env:
+          PINATA_API_KEY: ${{ secrets.PINATA_API_KEY }}
+          PINATA_SECRET_API_KEY: ${{ secrets.PINATA_SECRET_API_KEY }}
+          ZEIT_TOKEN: ${{ secrets.ZEIT_TOKEN }}
