@@ -26,7 +26,7 @@ async function main() {
   const existingHash = record.value.match(DNSLINK_REGEX)[1]
   // get the new ipfs hash from pinata and pin
   const newHash = await pinata
-    .pinFromFS(path.join(__dirname, 'out'), { pinataMetadata: { name: PINATA_NAME } })
+    .pinFromFS(path.join(path.resolve(), 'out'), { pinataMetadata: { name: PINATA_NAME } })
     .then(({ IpfsHash: hash }) => {
       console.log('Successfully pinned new files', hash)
       return hash
