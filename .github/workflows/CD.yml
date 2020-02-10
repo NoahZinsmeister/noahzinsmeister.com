@@ -13,7 +13,7 @@ jobs:
 
       - uses: actions/setup-node@v1
         with:
-          node-version: '13.x'
+          node-version: '12.x'
 
       - run: npm install -g yarn
 
@@ -30,7 +30,7 @@ jobs:
 
       - run: yarn build-ipfs
 
-      - run: node ipfs-deploy.ts
+      - run: node --experimental-modules ipfs-deploy.mjs
         env:
           PINATA_API_KEY: ${{ secrets.PINATA_API_KEY }}
           PINATA_SECRET_API_KEY: ${{ secrets.PINATA_SECRET_API_KEY }}
