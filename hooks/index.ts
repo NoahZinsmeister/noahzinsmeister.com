@@ -6,7 +6,6 @@ export function useBodyKeyDown(targetKey, onKeyDown, suppress = false) {
       if (event.target.tagName === 'BODY' && !event.altKey && !event.ctrlKey && !event.metaKey && !event.shiftKey) {
         if (event.key === targetKey && !suppress) {
           event.preventDefault()
-          window?.navigator?.vibrate(200)
           onKeyDown(event)
         }
       }

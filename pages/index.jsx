@@ -130,6 +130,7 @@ export default function Main() {
   function copyEmail() {
     copy('noahwz@gmail.com')
     setCopied(true)
+    window?.navigator?.vibrate(125) // eslint-disable-line no-unused-expressions
   }
 
   useEffect(() => {

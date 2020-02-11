@@ -4,6 +4,7 @@ import { useDarkModeManager } from '../contexts/LocalStorage'
 import SVGIcon, { GITHUB } from './SVGIcon'
 import Emoji from './Emoji'
 import Link from './Link'
+import { useCallback } from 'react'
 
 const IPFS = process.env.IPFS === 'true'
 
@@ -11,7 +12,12 @@ export default function Layout({ children }) {
   const [isDarkMode, toggleDarkMode] = useDarkModeManager()
   const theme = useTheme()
 
-  useBodyKeyDown('d', toggleDarkMode)
+  const toggleDarkModeWithVibrate = useCallback(() => {
+    window?.navigator?.vibrate(125) // eslint-disable-line no-unused-expressions
+    toggleDarkMode()
+  }, [toggleDarkMode])
+
+  useBodyKeyDown('d', toggleDarkModeWithVibrate)
 
   return (
     <div className="root">
@@ -21,7 +27,11 @@ export default function Layout({ children }) {
           <br />
           Zinsmeister
         </h1>
-        <Emoji emoji={isDarkMode ? '🌘' : '🌔'} label={isDarkMode ? 'moon' : 'sun'} onClick={toggleDarkMode} />
+        <Emoji
+          emoji={isDarkMode ? '🌘' : '🌔'}
+          label={isDarkMode ? 'moon' : 'sun'}
+          onClick={toggleDarkModeWithVibrate}
+        />
       </div>
 
       <div className="body">{children}</div>
