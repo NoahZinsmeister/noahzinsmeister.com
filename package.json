@@ -9,7 +9,8 @@
     "dev": "next dev",
     "build": "rimraf .next out && next build && next export",
     "build-ipfs": "rimraf .next out && IPFS=true next build && next export",
-    "start": "next start"
+    "start": "next start",
+    "deploy-ipfs": "node --experimental-modules ipfs-deploy.mjs"
   },
   "dependencies": {
     "copy-to-clipboard": "^3.2.0",
