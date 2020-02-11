@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
 
@@ -6,18 +7,11 @@ import useTheme from '../theme'
 import Layout from '../components/Layout'
 
 import '../styles.css'
-import { useEffect, useState } from 'react'
 
-function FunctionalRoot({ Component }) {
+function ThemedContent({ Component }) {
   const theme = useTheme()
 
-  // prevents FOUC issues with static assets + dark mode
-  const [painted, setPainted] = useState(false)
-  useEffect(() => {
-    setPainted(true)
-  }, [])
-
-  return !painted ? null : (
+  return (
     <>
       <Head>
         <link rel="shortcut icon" href={`./favicon-${theme.isDarkMode ? 'dark' : 'light'}.ico`} />
@@ -39,21 +33,33 @@ function FunctionalRoot({ Component }) {
   )
 }
 
+function FunctionRoot({ Component }) {
+  // prevents FOUC issues with static assets + dark mode
+  const [painted, setPainted] = useState(false)
+  useEffect(() => {
+    setPainted(true)
+  }, [])
+
+  return !painted ? null : (
+    <>
+      <LocalStorageContext>
+        <LocalStorageUpdater />
+        <ThemedContent Component={Component} />
+      </LocalStorageContext>
+    </>
+  )
+}
+
 export default class Root extends App {
   render() {
     const { Component } = this.props
-
     return (
       <>
         <Head>
           <title>Noah Zinsmeister</title>
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
         </Head>
-
-        <LocalStorageContext>
-          <LocalStorageUpdater />
-          <FunctionalRoot Component={Component} />
-        </LocalStorageContext>
+        <FunctionRoot Component={Component} />
       </>
     )
   }

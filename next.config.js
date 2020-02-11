@@ -1,7 +1,9 @@
+const isProduction = process.env.NODE_ENV === 'production'
+
 module.exports = {
   reactStrictMode: true,
   target: 'serverless',
-  assetPrefix: '.',
+  assetPrefix: isProduction ? '.' : '',
   env: {
     IPFS: process.env.IPFS
   }
