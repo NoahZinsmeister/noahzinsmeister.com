@@ -49,16 +49,24 @@ function Content() {
         <Emoji emoji={'🎬'} label={'videos'} />
         <ul className="list">
           <li>
-            <Link href="https://www.youtube.com/watch?v=9ih_J223Hrg">
-              Building Modern dApps in React with web3-react
-            </Link>{' '}
+            <Link href="https://www.youtube.com/watch?v=gRBCD5nzBdQ&t=18269">
+              DeFi: Composability, Adoption & What's Next
+            </Link>
             <br />
-            <code>2019-06-25</code>
+            <code>2020-02-15</code>
           </li>
+
           <li>
             <Link href="https://www.youtube.com/watch?v=wSUwFVp4Fn4&t=25589">DeFi's Real vs Expected Users</Link>
             <br />
             <code>2019-10-07</code>
+          </li>
+          <li>
+            <Link href="https://www.youtube.com/watch?v=9ih_J223Hrg">
+              Building Modern dApps in React with web3-react
+            </Link>
+            <br />
+            <code>2019-06-25</code>
           </li>
         </ul>
       </div>
@@ -66,11 +74,11 @@ function Content() {
         <Emoji emoji={'✒️'} label={'articles'} />
         <ul className="list">
           <li>
-            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
-              Regulatory Incentives and Quarter-End Dynamics in the Repo Market
+            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
+              The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
             </Link>
             <br />
-            <code>2017-08-07</code>
+            <code>2017-10-04</code>
           </li>
           <li>
             <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
@@ -80,11 +88,11 @@ function Content() {
             <code>2017-10-02</code>
           </li>
           <li>
-            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
-              The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
+            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
+              Regulatory Incentives and Quarter-End Dynamics in the Repo Market
             </Link>
             <br />
-            <code>2017-10-04</code>
+            <code>2017-08-07</code>
           </li>
         </ul>
       </div>
