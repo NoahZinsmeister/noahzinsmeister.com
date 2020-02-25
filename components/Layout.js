@@ -43,7 +43,10 @@ export default function Layout({ children }) {
         )}
 
         <code style={{ lineHeight: 1 }}>
-          commit <Link href={`https://github.com/NoahZinsmeister/noahzinsmeister.com/commit/${commit}`}>{commit} </Link>
+          commit{' '}
+          <Link href={`https://github.com/NoahZinsmeister/noahzinsmeister.com/commit/${commit}`}>
+            {commit.slice(0, 7)}{' '}
+          </Link>
         </code>
       </div>
 
