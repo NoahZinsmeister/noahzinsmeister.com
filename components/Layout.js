@@ -42,7 +42,7 @@ export default function Layout({ children }) {
           </Link>
         )}
 
-        <code style={{ lineHeight: 1 }}>
+        <code>
           commit{' '}
           <Link href={`https://github.com/NoahZinsmeister/noahzinsmeister.com/commit/${commit}`}>
             {commit.slice(0, 7)}{' '}
@@ -77,6 +77,7 @@ export default function Layout({ children }) {
           display: flex;
           flex: 0 1 auto;
           justify-content: ${IPFS ? 'space-between' : 'flex-end'};
+          align-items: flex-end;
           padding: 2rem;
         }
 
