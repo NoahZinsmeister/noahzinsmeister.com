@@ -5,6 +5,7 @@ module.exports = {
   target: 'serverless',
   assetPrefix: isProduction ? '.' : '',
   env: {
-    IPFS: process.env.IPFS
+    IPFS: process.env.IPFS,
+    NOW_GITHUB_COMMIT_SHA: process.env.NOW_GITHUB_COMMIT_SHA
   }
 }

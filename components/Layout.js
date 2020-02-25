@@ -1,16 +1,15 @@
 import { useBodyKeyDown } from '../hooks'
-import useTheme from '../theme'
 import { useDarkModeManager } from '../contexts/LocalStorage'
-import SVGIcon, { GITHUB } from './SVGIcon'
 import Emoji from './Emoji'
 import Link from './Link'
 import { useCallback } from 'react'
 
 const IPFS = process.env.IPFS === 'true'
 
+const commit = process.env.NOW_GITHUB_COMMIT_SHA || 'master'
+
 export default function Layout({ children }) {
   const [isDarkMode, toggleDarkMode] = useDarkModeManager()
-  const theme = useTheme()
 
   const toggleDarkModeWithVibrate = useCallback(() => {
     window?.navigator?.vibrate(125) // eslint-disable-line no-unused-expressions
@@ -43,9 +42,9 @@ export default function Layout({ children }) {
           </Link>
         )}
 
-        <Link style={{ lineHeight: 0 }} href="https://github.com/NoahZinsmeister/noahzinsmeister.com">
-          <SVGIcon name={GITHUB} width="24px" fill={theme.colors.text} />
-        </Link>
+        <code style={{ lineHeight: 1 }}>
+          commit <Link href={`https://github.com/NoahZinsmeister/noahzinsmeister.com/commit/${commit}`}>{commit} </Link>
+        </code>
       </div>
 
       <style jsx>{`
