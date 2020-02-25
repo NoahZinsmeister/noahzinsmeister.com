@@ -6,6 +6,7 @@ module.exports = {
   assetPrefix: isProduction ? '.' : '',
   env: {
     IPFS: process.env.IPFS,
-    NOW_GITHUB_COMMIT_SHA: process.env.NOW_GITHUB_COMMIT_SHA
+    NOW_GITHUB_COMMIT_SHA: process.env.NOW_GITHUB_COMMIT_SHA,
+    GITHUB_SHA: process.env.GITHUB_SHA
   }
 }

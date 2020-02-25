@@ -6,7 +6,7 @@ import { useCallback } from 'react'
 
 const IPFS = process.env.IPFS === 'true'
 
-const commit = process.env.NOW_GITHUB_COMMIT_SHA || 'master'
+const commit = process.env.NOW_GITHUB_COMMIT_SHA || process.env.GITHUB_SHA || 'master'
 
 export default function Layout({ children }) {
   const [isDarkMode, toggleDarkMode] = useDarkModeManager()
