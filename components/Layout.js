@@ -44,7 +44,7 @@ export default function Layout({ children }) {
 
         <code>
           commit{' '}
-          <Link href={`https://github.com/NoahZinsmeister/noahzinsmeister.com/commit/${commit}`}>
+          <Link href={`https://github.com/NoahZinsmeister/noahzinsmeister.com/tree/${commit}`}>
             {commit.slice(0, 7)}{' '}
           </Link>
         </code>
