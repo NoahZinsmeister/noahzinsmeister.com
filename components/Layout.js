@@ -12,8 +12,10 @@ export default function Layout({ children }) {
   const [isDarkMode, toggleDarkMode] = useDarkModeManager()
 
   const toggleDarkModeWithVibrate = useCallback(() => {
-    window?.navigator?.vibrate(125) // eslint-disable-line no-unused-expressions
     toggleDarkMode()
+    try {
+      window.navigator.vibrate(125)
+    } catch {}
   }, [toggleDarkMode])
 
   useBodyKeyDown('d', toggleDarkModeWithVibrate)
