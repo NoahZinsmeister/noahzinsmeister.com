@@ -14,7 +14,7 @@ function ThemedContent({ Component }) {
   return (
     <>
       <Head>
-        <link rel="shortcut icon" href={`./favicon-${theme.isDarkMode ? 'dark' : 'light'}.ico`} />
+        <link rel="shortcut icon" href={`./favicon${theme.isDarkMode ? '-dark' : ''}.ico`} />
       </Head>
 
       <Layout>

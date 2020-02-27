@@ -91,7 +91,7 @@ export function Updater() {
   return null
 }
 
-export function useDarkModeManager() {
+export function useDarkModeManager(): [boolean, () => void] {
   const [state, { changeDarkMode }] = useLocalStorageContext()
 
   const isDarkMode = state[LocalStorageKey.DARK_MODE]

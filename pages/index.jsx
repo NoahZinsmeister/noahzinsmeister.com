@@ -171,7 +171,7 @@ export default function Main() {
           <Emoji
             style={{ marginLeft: '.5rem' }}
             size={'1.25rem'}
-            emoji={copied ? '👍🏻' : '📋'}
+            emoji={copied ? '👍' : '📋'}
             label={copied ? 'copied' : 'copy'}
             onClick={!copied && copyEmail}
           />

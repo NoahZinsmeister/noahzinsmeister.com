@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 
 export default function Emoji({ emoji, label = 'emoji', size = '24px', onClick, ...rest }) {
-  const ref = useRef()
+  const ref = useRef<HTMLSpanElement>()
 
   function wrappedOnClick(event) {
     ref.current.blur()
