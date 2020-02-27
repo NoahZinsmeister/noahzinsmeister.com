@@ -29,6 +29,7 @@ export default function Layout({ children }) {
           Zinsmeister
         </h1>
         <Emoji
+          style={{ height: 'fit-content' }}
           emoji={isDarkMode ? '🌘' : '🌔'}
           label={isDarkMode ? 'moon' : 'sun'}
           onClick={toggleDarkModeWithVibrate}
