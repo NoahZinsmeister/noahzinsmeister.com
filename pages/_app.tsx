@@ -30,7 +30,7 @@ function ThemedContent({ Component }) {
             )}
           />
         )}
-        <link rel="shortcut icon" href={`/favicon${theme.isDarkMode ? '-dark' : ''}.ico`} />
+        <link rel="shortcut icon" href={`${IPFS ? '.' : ''}/favicon${theme.isDarkMode ? '-dark' : ''}.ico`} />
       </Head>
 
       <Layout>

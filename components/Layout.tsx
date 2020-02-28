@@ -59,7 +59,11 @@ export default function Layout({ children }) {
       <div className="footer">
         {IPFS && (
           <Link style={{ lineHeight: 0 }} href="https://ipfs.io" title="Served over IPFS">
-            <img className="ipfs" src={`/ipfs-${isDarkMode ? 'light' : 'dark'}.png`} alt="Served over IPFS" />
+            <img
+              className="ipfs"
+              src={`${IPFS ? '.' : ''}/ipfs-${isDarkMode ? 'light' : 'dark'}.png`}
+              alt="Served over IPFS"
+            />
           </Link>
         )}
 
