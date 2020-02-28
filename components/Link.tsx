@@ -1,7 +1,10 @@
+import { resolve } from 'url'
 import NextLink from 'next/link'
 import { darken, lighten } from 'polished'
 
 import useTheme from '../theme'
+
+const IPFS = process.env.IPFS === 'true'
 
 export default function Link({ href, children, asNextLink = false, ...rest }) {
   const theme = useTheme()
@@ -9,7 +12,7 @@ export default function Link({ href, children, asNextLink = false, ...rest }) {
   return (
     <>
       {asNextLink ? (
-        <NextLink href={href}>
+        <NextLink href={href} as={!IPFS ? href : resolve(window.location.pathname, href)}>
           <a {...rest}>{children}</a>
         </NextLink>
       ) : (
