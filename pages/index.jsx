@@ -109,8 +109,8 @@ function Content() {
           framework I created for building blockchain applications). In my spare time I like to ski, play games, and{' '}
           <Link href="/photography" asNextLink>
             take photos
-          </Link>
-          .
+          </Link>{' '}
+          (which I once did for a <Link href="https://fingerlakesfeast.com/">cookbook</Link>).
         </p>
       </div>
       <div className="section">
