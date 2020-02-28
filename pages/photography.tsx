@@ -41,7 +41,7 @@ export default function Photography() {
           variant={variant}
           isOpen={variant === openVariant}
           onDismiss={() => {
-            setOpenVariant()
+            setOpenVariant(undefined)
           }}
         />
       ))}

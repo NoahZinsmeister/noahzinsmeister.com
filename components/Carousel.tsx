@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { Dialog } from '@reach/dialog'
+import { DialogOverlay, DialogContent } from '@reach/dialog'
 import Swiper from 'react-id-swiper'
 
 import { useKeyDown } from '../hooks'
@@ -48,51 +48,63 @@ export default function Carousel({
 
   return (
     <>
-      <Dialog
-        aria-label="Carousel"
+      <DialogOverlay
+        style={{ background: 'rgba(255, 255, 255, 0.25)', backdropFilter: 'blur(2px)' }}
         isOpen={isOpen}
         onDismiss={onDismiss}
-        style={{ width: '80vw', height: '80vh', padding: '0', background: 'transparent', display: 'flex' }}
       >
-        <Swiper
-          getSwiper={updateSwiper}
-          {...{
-            effect: 'coverflow',
-            spaceBetween: 30,
-            grabCursor: true,
-            loop: true,
-            navigation: {
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev'
-            },
-            renderNextButton: () => (
-              <button
-                style={{ background: 'transparent', border: 'none', fontSize: 0, outline: 'none' }}
-                className="swiper-button-next"
-              />
-            ),
-            renderPrevButton: () => (
-              <button
-                style={{ background: 'transparent', border: 'none', fontSize: 0, outline: 'none' }}
-                className="swiper-button-prev"
-              />
-            ),
-            pagination: {
-              el: '.swiper-pagination',
-              clickable: true
-            }
+        <DialogContent
+          aria-label="Carousel"
+          style={{
+            width: '90vw',
+            height: '100vh',
+            padding: '0',
+            background: 'transparent',
+            display: 'flex',
+            margin: 'auto'
           }}
         >
-          {Array.from(Array(DATA[variant]).keys()).map(i => (
-            <img key={i} src={`./photography/${variant}${i + 1}.jpg`} alt="" />
-          ))}
-        </Swiper>
-      </Dialog>
+          <Swiper
+            getSwiper={updateSwiper}
+            {...{
+              effect: 'coverflow',
+              spaceBetween: 30,
+              grabCursor: true,
+              loop: true,
+              navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev'
+              },
+              renderNextButton: () => (
+                <button
+                  style={{ background: 'transparent', border: 'none', fontSize: 0, outline: 'none' }}
+                  className="swiper-button-next"
+                />
+              ),
+              renderPrevButton: () => (
+                <button
+                  style={{ background: 'transparent', border: 'none', fontSize: 0, outline: 'none' }}
+                  className="swiper-button-prev"
+                />
+              ),
+              pagination: {
+                el: '.swiper-pagination',
+                clickable: true
+              }
+            }}
+          >
+            {Array.from(Array(DATA[variant]).keys()).map(i => (
+              <img key={i} src={`./photography/${variant}${i + 1}.jpg`} alt="" {...{ loading: 'lazy' }} />
+            ))}
+          </Swiper>
+        </DialogContent>
+      </DialogOverlay>
 
       <style jsx>{`
         img {
           width: 100%;
-          height: 100%;
+          height: auto;
+          max-height: 100%;
           object-fit: contain;
         }
       `}</style>

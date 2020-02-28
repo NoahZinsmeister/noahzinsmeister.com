@@ -13,10 +13,16 @@ import '../styles.css'
 function ThemedContent({ Component }) {
   const theme = useTheme()
 
+  const [base, setBase] = useState()
+  useEffect(() => {
+    setBase(window.location.origin)
+  }, [])
+
   return (
     <>
       <Head>
         <link rel="shortcut icon" href={`./favicon${theme.isDarkMode ? '-dark' : ''}.ico`} />
+        {base && <base href={base} />}
       </Head>
 
       <Layout>

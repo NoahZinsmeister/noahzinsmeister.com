@@ -1,6 +1,15 @@
 import { useRef } from 'react'
 
-export default function Emoji({ emoji, label = 'emoji', size = '24px', onClick, ...rest }) {
+export default function Emoji({
+  emoji,
+  label = 'emoji',
+  size = '24px',
+  onClick,
+  ...rest
+}: {
+  onClick?: (event: any) => void
+  [key: string]: any
+}) {
   const ref = useRef<HTMLSpanElement>()
 
   function wrappedOnClick(event) {
@@ -21,9 +30,9 @@ export default function Emoji({ emoji, label = 'emoji', size = '24px', onClick, 
         ref={ref}
         role="img"
         aria-label={label}
-        onClick={!!onClick ? wrappedOnClick : undefined}
-        onKeyPress={!!onClick ? onEnterPressed : undefined}
-        tabIndex={!!onClick ? 0 : undefined}
+        onClick={typeof onClick === 'function' ? wrappedOnClick : undefined}
+        onKeyPress={typeof onClick === 'function' ? onEnterPressed : undefined}
+        tabIndex={typeof onClick === 'function' ? 0 : undefined}
         {...rest}
       >
         {emoji}
