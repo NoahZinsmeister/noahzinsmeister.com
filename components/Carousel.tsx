@@ -67,7 +67,6 @@ export default function Carousel({
           <Swiper
             getSwiper={updateSwiper}
             {...{
-              effect: 'coverflow',
               spaceBetween: 30,
               grabCursor: true,
               loop: true,
