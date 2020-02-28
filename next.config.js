@@ -1,6 +1,7 @@
 module.exports = {
   reactStrictMode: true,
   target: 'serverless',
+  assetPrefix: process.env.IPFS === 'true' ? '.' : '',
   env: {
     IPFS: process.env.IPFS,
     NOW_GITHUB_COMMIT_SHA: process.env.NOW_GITHUB_COMMIT_SHA,
