@@ -9,8 +9,8 @@ export default function Emoji({ emoji, label = 'emoji', size = '24px', onClick, 
   }
 
   function onEnterPressed(event) {
-    event.preventDefault()
     if (event.key === 'Enter') {
+      event.preventDefault()
       onClick(event)
     }
   }

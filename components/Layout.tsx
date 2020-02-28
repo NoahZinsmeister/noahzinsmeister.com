@@ -1,8 +1,10 @@
-import { useBodyKeyDown } from '../hooks'
+import { useCallback } from 'react'
+import { useRouter } from 'next/router'
+
+import { useKeyDown } from '../hooks'
 import { useDarkModeManager } from '../contexts/LocalStorage'
 import Emoji from './Emoji'
 import Link from './Link'
-import { useCallback } from 'react'
 
 const IPFS = process.env.IPFS === 'true'
 
@@ -10,6 +12,8 @@ const commit = process.env.NOW_GITHUB_COMMIT_SHA || process.env.GITHUB_SHA || 'm
 
 export default function Layout({ children }) {
   const [isDarkMode, toggleDarkMode] = useDarkModeManager()
+  const { route } = useRouter()
+  const isPhotography = route === '/photography'
 
   const toggleDarkModeWithVibrate = useCallback(() => {
     toggleDarkMode()
@@ -18,15 +22,29 @@ export default function Layout({ children }) {
     } catch {}
   }, [toggleDarkMode])
 
-  useBodyKeyDown('d', toggleDarkModeWithVibrate)
+  useKeyDown('d', toggleDarkModeWithVibrate)
 
   return (
     <div className="root">
       <div className="header">
         <h1 className="title" style={{ lineHeight: 1 }}>
-          Noah
-          <br />
-          Zinsmeister
+          {isPhotography ? (
+            <>
+              <Link href="/" asNextLink style={{ color: 'unset' }}>
+                Noah
+                <br />
+                Zinsmeister
+              </Link>
+              <br />
+              Photography
+            </>
+          ) : (
+            <>
+              Noah
+              <br />
+              Zinsmeister
+            </>
+          )}
         </h1>
         <Emoji
           style={{ height: 'fit-content' }}

@@ -1,15 +1,22 @@
+import NextLink from 'next/link'
 import { darken, lighten } from 'polished'
 
 import useTheme from '../theme'
 
-export default function Link({ href, children, ...rest }) {
+export default function Link({ href, children, asNextLink = false, ...rest }) {
   const theme = useTheme()
 
   return (
     <>
-      <a target="_blank" rel="noopener noreferrer" href={href} {...rest}>
-        {children}
-      </a>
+      {asNextLink ? (
+        <NextLink href={href}>
+          <a {...rest}>{children}</a>
+        </NextLink>
+      ) : (
+        <a target="_blank" rel="noopener noreferrer" href={href} {...rest}>
+          {children}
+        </a>
+      )}
 
       <style jsx>{`
         a {

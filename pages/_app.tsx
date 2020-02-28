@@ -6,6 +6,8 @@ import LocalStorageContext, { Updater as LocalStorageUpdater } from '../contexts
 import useTheme from '../theme'
 import Layout from '../components/Layout'
 
+import '@reach/dialog/styles.css'
+import 'swiper/css/swiper.css'
 import '../styles.css'
 
 function ThemedContent({ Component }) {
@@ -57,6 +59,7 @@ export default class Root extends App {
       <>
         <Head>
           <title>Noah Zinsmeister</title>
+          <meta name="Description" content="Noah Zinsmeister's website." />
           <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet" />
         </Head>
         <FunctionRoot Component={Component} />

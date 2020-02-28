@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { resolve } from 'styled-jsx/css'
 import copy from 'copy-to-clipboard'
 
-import { useBodyKeyDown } from '../hooks'
+import { useKeyDown } from '../hooks'
 import Emoji from '../components/Emoji'
 import Link from '../components/Link'
 
@@ -14,6 +14,72 @@ function getUniswapLinkStyles() {
   `
 }
 
+export default function Index() {
+  const [copied, setCopied] = useState(false)
+
+  function copyEmail() {
+    copy('noahwz@gmail.com')
+    setCopied(true)
+    try {
+      window.navigator.vibrate(125)
+    } catch {}
+  }
+
+  useEffect(() => {
+    if (copied) {
+      const timeout = setTimeout(() => {
+        setCopied(false)
+      }, 500)
+
+      return () => {
+        clearTimeout(timeout)
+      }
+    }
+  }, [copied])
+
+  useKeyDown('c', copyEmail, copied === true)
+
+  return (
+    <>
+      <div className="links">
+        <div className="link-wrapper">
+          <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
+        </div>
+        <div className="link-wrapper">
+          <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
+        </div>
+        <div className="link-wrapper">
+          <Link href="mailto:noahwz@gmail.com">Email</Link>
+          <Emoji
+            style={{ marginLeft: '.5rem' }}
+            size={'1.25rem'}
+            emoji={copied ? '👍' : '📋'}
+            label={copied ? 'copied' : 'copy'}
+            onClick={!copied && copyEmail}
+          />
+        </div>
+      </div>
+
+      <Content />
+
+      <style jsx>{`
+        .links {
+          display: flex;
+          margin-top: -2rem;
+          margin-right: -0.75rem;
+          margin-bottom: 4rem;
+        }
+
+        .link-wrapper {
+          display: flex;
+          margin-top: 1rem;
+          margin-right: 0.75rem;
+        }
+      `}</style>
+    </>
+  )
+}
+
 function Content() {
   const [E, setE] = useState('E')
   const { className, styles } = getUniswapLinkStyles()
@@ -23,13 +89,12 @@ function Content() {
       <div className="section">
         <Emoji emoji={'🎙'} label={'biography'} />
         <p className="text">
-          I graduated from <span className="columbia">Columbia</span> in 2016 with a B.A. in Economics-Mathematics.
-          After a close call with a PhD, I became fascinated with cryptocurrencies and have since gone fully down the
-          rabbit hole. At the moment I live in Williamsburg and work as Engineering Lead at{' '}
+          I graduated from <span className="columbia">Columbia</span> with a B.A. in Economics-Mathematics in 2016.
+          After a close call with a PhD, I fell down the cryptocurrency rabbit hole. I'm now Engineering Lead at{' '}
           <Link className={className} href="https://uniswap.io">
             Uniswap
           </Link>
-          {styles}, a decentralized digital asset exchange built on{' '}
+          {styles} (a decentralized digital asset exchange built on{' '}
           <span
             onMouseEnter={() => {
               setE('Ξ')
@@ -40,9 +105,12 @@ function Content() {
           >
             {E}thereum
           </span>
-          . I also maintain <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link>, a framework I
-          created for building blockchain applications. In my spare time I enjoy skiing, games, tennis and{' '}
-          <Link href="https://photography.noahzinsmeister.com/">taking photos</Link>.
+          ), and I also maintain <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link> (a
+          framework I created for building blockchain applications). In my spare time I like to ski, play games, and{' '}
+          <Link href="/photography" asNextLink>
+            take photos
+          </Link>
+          .
         </p>
       </div>
       <div className="section">
@@ -126,72 +194,6 @@ function Content() {
         }
         .list li :not(:last-child) {
           margin-bottom: 0.5rem;
-        }
-      `}</style>
-    </>
-  )
-}
-
-export default function Main() {
-  const [copied, setCopied] = useState(false)
-
-  function copyEmail() {
-    copy('noahwz@gmail.com')
-    setCopied(true)
-    try {
-      window.navigator.vibrate(125)
-    } catch {}
-  }
-
-  useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => {
-        setCopied(false)
-      }, 500)
-
-      return () => {
-        clearTimeout(timeout)
-      }
-    }
-  }, [copied])
-
-  useBodyKeyDown('c', copyEmail, copied === true)
-
-  return (
-    <>
-      <div className="links">
-        <div className="link-wrapper">
-          <Link href="https://github.com/NoahZinsmeister">GitHub</Link>
-        </div>
-        <div className="link-wrapper">
-          <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
-        </div>
-        <div className="link-wrapper">
-          <Link href="mailto:noahwz@gmail.com">Email</Link>
-          <Emoji
-            style={{ marginLeft: '.5rem' }}
-            size={'1.25rem'}
-            emoji={copied ? '👍' : '📋'}
-            label={copied ? 'copied' : 'copy'}
-            onClick={!copied && copyEmail}
-          />
-        </div>
-      </div>
-
-      <Content />
-
-      <style jsx>{`
-        .links {
-          display: flex;
-          margin-top: -2rem;
-          margin-right: -0.75rem;
-          margin-bottom: 4rem;
-        }
-
-        .link-wrapper {
-          display: flex;
-          margin-top: 1rem;
-          margin-right: 0.75rem;
         }
       `}</style>
     </>
