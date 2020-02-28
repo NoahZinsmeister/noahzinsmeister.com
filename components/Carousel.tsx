@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react'
 import { DialogOverlay, DialogContent } from '@reach/dialog'
 import Swiper from 'react-id-swiper'
+import { resolve } from 'url'
 
 import { useKeyDown } from '../hooks'
 
@@ -95,14 +96,15 @@ export default function Carousel({
               }
             }}
           >
-            {Array.from(Array(DATA[variant]).keys()).map(i => (
-              <img
-                key={i}
-                src={`${IPFS ? '.' : ''}/photography/${variant}${i + 1}.jpg`}
-                alt=""
-                {...{ loading: 'lazy' }}
-              />
-            ))}
+            {Array.from(Array(DATA[variant]).keys()).map(i => {
+              // i think we have to do this because we're in a portal?
+              let src = `/photography/${variant}${i + 1}.jpg`
+              if (IPFS) {
+                src = `.${src}`
+                src = resolve(document?.baseURI, src)
+              }
+              return <img key={i} src={src} alt="" {...{ loading: 'lazy' }} />
+            })}
           </Swiper>
         </DialogContent>
       </DialogOverlay>
