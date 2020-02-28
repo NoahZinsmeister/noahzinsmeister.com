@@ -5,7 +5,11 @@ const IPFS = process.env.IPFS === 'true'
 export function getRelativeURI(fragment: string): string {
   let uri = fragment
   if (IPFS) {
-    uri = resolve(document?.baseURI, fragment)
+    let baseURI = document.baseURI
+    if (baseURI[baseURI.length - 1] !== '/') {
+      baseURI = `${baseURI}/`
+    }
+    uri = resolve(baseURI, `.${fragment}`)
   }
   return uri
 }
