@@ -17,9 +17,9 @@ const DATA = {
   [Variant.Urban]: 9,
   [Variant.Food]: 8,
   [Variant.Portraits]: 9,
-  [Variant.Nature]: 12,
+  [Variant.Nature]: 11,
   [Variant.Buildings]: 8,
-  [Variant.Events]: 12
+  [Variant.Events]: 10
 }
 
 export default function Carousel({
