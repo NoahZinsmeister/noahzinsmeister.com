@@ -5,6 +5,7 @@ import { resolve } from 'url'
 
 import LocalStorageContext, { Updater as LocalStorageUpdater } from '../contexts/LocalStorage'
 import useTheme from '../theme'
+import { getRelativeURI } from '../utils'
 import Layout from '../components/Layout'
 
 import '@reach/dialog/styles.css'
@@ -30,7 +31,7 @@ function ThemedContent({ Component }) {
             )}
           />
         )}
-        <link rel="shortcut icon" href={`${IPFS ? '.' : ''}/favicon${theme.isDarkMode ? '-dark' : ''}.ico`} />
+        <link rel="shortcut icon" href={getRelativeURI(`/favicon${theme.isDarkMode ? '-dark' : ''}.ico`)} />
       </Head>
 
       <Layout>

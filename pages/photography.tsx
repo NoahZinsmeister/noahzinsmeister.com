@@ -1,9 +1,8 @@
 import { useState } from 'react'
 
 import useTheme from '../theme'
+import { getRelativeURI } from '../utils'
 import Carousel, { Variant } from '../components/Carousel'
-
-const IPFS = process.env.IPFS === 'true'
 
 const VARIANTS = [Variant.Urban, Variant.Food, Variant.Portraits, Variant.Nature, Variant.Buildings, Variant.Events]
 
@@ -15,7 +14,7 @@ export default function Photography() {
     <>
       <div className="wrapper">
         {VARIANTS.map(variant => {
-          const url = `${IPFS ? '.' : ''}/photography/${variant}1.jpg`
+          const url = getRelativeURI(`/photography/${variant}1.jpg`)
           return (
             <div
               key={variant}

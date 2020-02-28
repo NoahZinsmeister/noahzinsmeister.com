@@ -1,19 +1,17 @@
 import NextLink from 'next/link'
-import { resolve } from 'url'
 import { darken, lighten } from 'polished'
 
 import useTheme from '../theme'
+import { getRelativeURI } from '../utils'
 
 const IPFS = process.env.IPFS === 'true'
 
 export default function Link({ href, children, asNextLink = false, ...rest }) {
   const theme = useTheme()
 
-  // resolve(window.location.pathname, href)}
   let as = href
   if (IPFS) {
-    as = `.${as}${as === '/' ? '' : '.html'}`
-    as = resolve(document?.baseURI, as)
+    as = getRelativeURI(`${as}${as === '/' ? '' : '.html'}`)
   }
 
   return (

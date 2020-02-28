@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 
+import { getRelativeURI } from '../utils'
 import { useKeyDown } from '../hooks'
 import { useDarkModeManager } from '../contexts/LocalStorage'
 import Emoji from './Emoji'
@@ -61,7 +62,7 @@ export default function Layout({ children }) {
           <Link style={{ lineHeight: 0 }} href="https://ipfs.io" title="Served over IPFS">
             <img
               className="ipfs"
-              src={`${IPFS ? '.' : ''}/ipfs-${isDarkMode ? 'light' : 'dark'}.png`}
+              src={getRelativeURI(`/ipfs-${isDarkMode ? 'light' : 'dark'}.png`)}
               alt="Served over IPFS"
             />
           </Link>
