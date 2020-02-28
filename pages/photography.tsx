@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import useTheme from '../theme'
 import Carousel, { Variant } from '../components/Carousel'
+import Head from 'next/head'
 
 const VARIANTS = [Variant.Urban, Variant.Food, Variant.Portraits, Variant.Nature, Variant.Buildings, Variant.Events]
 
@@ -9,11 +10,19 @@ export default function Photography() {
   const theme = useTheme()
   const [openVariant, setOpenVariant] = useState()
 
+  const [base, setBase] = useState()
+  useEffect(() => {
+    setBase(window.location.origin)
+  }, [])
+
   return (
     <>
+      <Head>
+        <base href={base} />
+      </Head>
       <div className="wrapper">
         {VARIANTS.map(variant => {
-          const url = `./photography/${variant}1.jpg`
+          const url = `/photography/${variant}1.jpg`
           return (
             <div
               key={variant}

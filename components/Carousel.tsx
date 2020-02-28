@@ -94,7 +94,7 @@ export default function Carousel({
             }}
           >
             {Array.from(Array(DATA[variant]).keys()).map(i => (
-              <img key={i} src={`./photography/${variant}${i + 1}.jpg`} alt="" {...{ loading: 'lazy' }} />
+              <img key={i} src={`/photography/${variant}${i + 1}.jpg`} alt="" {...{ loading: 'lazy' }} />
             ))}
           </Swiper>
         </DialogContent>
