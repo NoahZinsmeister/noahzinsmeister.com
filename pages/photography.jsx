@@ -13,7 +13,7 @@ export default function Photography() {
     <>
       <div className="wrapper">
         {VARIANTS.map(variant => {
-          const url = `photography/${variant}1.jpg`
+          const url = `./photography/${variant}1.jpg`
           return (
             <div
               key={variant}
