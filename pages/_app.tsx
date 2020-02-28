@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
+import { resolve } from 'url'
 
 import LocalStorageContext, { Updater as LocalStorageUpdater } from '../contexts/LocalStorage'
 import useTheme from '../theme'
@@ -10,12 +11,25 @@ import '@reach/dialog/styles.css'
 import 'swiper/css/swiper.css'
 import '../styles.css'
 
+const IPFS = process.env.IPFS === 'true'
+
 function ThemedContent({ Component }) {
   const theme = useTheme()
 
   return (
     <>
       <Head>
+        {IPFS && (
+          <base
+            href={resolve(
+              window.location.origin,
+              window.location.pathname
+                .split('/')
+                .slice(0, 3)
+                .join('/')
+            )}
+          />
+        )}
         <link rel="shortcut icon" href={`/favicon${theme.isDarkMode ? '-dark' : ''}.ico`} />
       </Head>
 

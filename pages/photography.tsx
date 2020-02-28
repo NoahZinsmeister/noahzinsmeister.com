@@ -1,11 +1,8 @@
 import { useState } from 'react'
-import Head from 'next/head'
-import { resolve } from 'url'
 
 import useTheme from '../theme'
 import Carousel, { Variant } from '../components/Carousel'
 
-const IPFS = process.env.IPFS === 'true'
 const VARIANTS = [Variant.Urban, Variant.Food, Variant.Portraits, Variant.Nature, Variant.Buildings, Variant.Events]
 
 export default function Photography() {
@@ -14,19 +11,6 @@ export default function Photography() {
 
   return (
     <>
-      {IPFS && (
-        <Head>
-          <base
-            href={resolve(
-              window.location.origin,
-              window.location.pathname
-                .split('/')
-                .slice(0, 2)
-                .join('/')
-            )}
-          />
-        </Head>
-      )}
       <div className="wrapper">
         {VARIANTS.map(variant => {
           const url = `/photography/${variant}1.jpg`
