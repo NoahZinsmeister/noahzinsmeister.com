@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
-import { resolve } from 'url'
 
 import LocalStorageContext, { Updater as LocalStorageUpdater } from '../contexts/LocalStorage'
 import useTheme from '../theme'
-import { getRelativeURI } from '../utils'
+import { getBaseURI, getRelativeURI } from '../utils'
 import Layout from '../components/Layout'
 
 import '@reach/dialog/styles.css'
@@ -20,17 +19,7 @@ function ThemedContent({ Component }) {
   return (
     <>
       <Head>
-        {IPFS && (
-          <base
-            href={resolve(
-              window.location.origin,
-              window.location.pathname
-                .split('/')
-                .slice(0, 3)
-                .join('/')
-            )}
-          />
-        )}
+        {IPFS && <base href={getBaseURI()} />}
         <link rel="shortcut icon" href={getRelativeURI(`/favicon${theme.isDarkMode ? '-dark' : ''}.ico`)} />
       </Head>
 
