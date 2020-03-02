@@ -1,6 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { DialogOverlay, DialogContent } from '@reach/dialog'
 import Swiper from 'react-id-swiper'
+import { isMobile } from 'react-device-detect'
 
 import { getRelativeURI } from '../utils'
 import { useKeyDown } from '../hooks'
@@ -51,7 +52,7 @@ export default function Carousel({
     (i: number) =>
       function() {
         if (swiper !== null) {
-          swiper.slideTo(i)
+          swiper.slideToLoop(i)
         }
       },
     [swiper]
@@ -80,12 +81,16 @@ export default function Carousel({
           <button className="close-button" onClick={onDismiss}>
             <h1>✕</h1>
           </button>
-          <button className="previous-button" onClick={goPrevious}>
-            <h1>←</h1>
-          </button>
-          <button className="next-button" onClick={goNext}>
-            <h1>→</h1>
-          </button>
+          {!isMobile && (
+            <>
+              <button className="previous-button" onClick={goPrevious}>
+                <h1>←</h1>
+              </button>
+              <button className="next-button" onClick={goNext}>
+                <h1>→</h1>
+              </button>
+            </>
+          )}
           <Swiper
             getSwiper={updateSwiper}
             {...{
@@ -106,7 +111,7 @@ export default function Carousel({
               return (
                 <button
                   key={i}
-                  onClick={goTo(i + 1)}
+                  onClick={goTo(i)}
                   style={{
                     ...{ background: `url(${url}) no-repeat` },
                     ...(active ? { border: `1px solid ${theme.colors.link}` } : { opacity: 0.9 })
@@ -126,7 +131,7 @@ export default function Carousel({
         }
 
         :global([data-reach-dialog-content]) {
-          width: 80vw;
+          width: ${isMobile ? '90vw' : '80vw'};
           max-height: 80vh;
           padding: 0;
           background: transparent;
