@@ -61,12 +61,16 @@ export default function Carousel({
   const [, forceRerender] = useState(0)
   useEffect(() => {
     if (swiper !== null) {
-      const onSlideChange = () => {
+      const force = () => {
         forceRerender(i => i + 1)
       }
-      swiper?.on('slideChange', onSlideChange)
+      swiper?.on('init', force)
+      swiper?.on('slideChange', force)
+      swiper?.on('loopFix', force)
       return () => {
-        swiper?.off('slideChange', onSlideChange)
+        swiper?.off('init', force)
+        swiper?.off('slideChange', force)
+        swiper?.off('loopFix', force)
       }
     }
   }, [swiper])
