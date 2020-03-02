@@ -1,4 +1,35 @@
-import { useRef } from 'react'
+import { ReactNode, MouseEvent } from 'react'
+
+import Button from './Button'
+
+function BaseEmoji({
+  label,
+  size,
+  children,
+  ...rest
+}: {
+  label: string
+  size?: string
+  children: ReactNode
+  [key: string]: any
+}) {
+  return (
+    <>
+      <span role="img" aria-label={label} {...rest}>
+        {children}
+      </span>
+      <style jsx>{`
+        span {
+          line-height: ${size};
+          font-size: ${size};
+          width: ${size};
+          min-width: ${size};
+          max-width: ${size};
+        }
+      `}</style>
+    </>
+  )
+}
 
 export default function Emoji({
   emoji,
@@ -7,53 +38,33 @@ export default function Emoji({
   onClick,
   ...rest
 }: {
-  onClick?: (event: any) => void
+  emoji: string
+  label?: string
+  size?: string
+  onClick?: (event: MouseEvent) => void
   [key: string]: any
 }) {
-  const ref = useRef<HTMLSpanElement>()
+  if (typeof onClick === 'function') {
+    return (
+      <>
+        <Button onClick={onClick} {...rest}>
+          <BaseEmoji label={label} size={size}>
+            {emoji}
+          </BaseEmoji>
+        </Button>
 
-  function wrappedOnClick(event) {
-    ref.current.blur()
-    onClick(event)
-  }
-
-  function onEnterPressed(event) {
-    if (event.key === 'Enter') {
-      event.preventDefault()
-      onClick(event)
-    }
-  }
-
-  return (
-    <>
-      <span
-        ref={ref}
-        role="img"
-        aria-label={label}
-        onClick={typeof onClick === 'function' ? wrappedOnClick : undefined}
-        onKeyPress={typeof onClick === 'function' ? onEnterPressed : undefined}
-        tabIndex={typeof onClick === 'function' ? 0 : undefined}
-        {...rest}
-      >
+        <style jsx>{`
+          span {
+            user-select: none;
+          }
+        `}</style>
+      </>
+    )
+  } else {
+    return (
+      <BaseEmoji label={label} size={size} {...rest}>
         {emoji}
-      </span>
-
-      <style jsx>{`
-        span {
-          ${onClick ? `user-select: none;` : ''}
-          font-size: ${size};
-          line-height: ${size};
-          width: ${size};
-        }
-
-        span:hover {
-          ${onClick ? `cursor: pointer;` : ''}
-        }
-
-        span:active:focus {
-          ${onClick ? `outline: none;` : ''}
-        }
-      `}</style>
-    </>
-  )
+      </BaseEmoji>
+    )
+  }
 }

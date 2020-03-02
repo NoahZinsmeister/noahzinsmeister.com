@@ -1,10 +1,33 @@
 import { useState } from 'react'
+import { resolve } from 'styled-jsx/css'
 
 import useTheme from '../theme'
 import { getRelativeURI } from '../utils'
 import Carousel, { Variant } from '../components/Carousel'
+import Button from '../components/Button'
 
 const VARIANTS = [Variant.Urban, Variant.Food, Variant.Portraits, Variant.Nature, Variant.Buildings, Variant.Events]
+
+const { className, styles } = resolve`
+  button {
+    display: flex;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    background-size: 100% !important;
+    background-position: center !important;
+    margin: 1.5rem;
+    width: 16rem;
+    height: 9rem;
+    opacity: 0.9;
+  }
+
+  button:hover,
+  button:focus {
+    opacity: 1;
+  }
+`
 
 export default function Photography() {
   const theme = useTheme()
@@ -14,24 +37,18 @@ export default function Photography() {
     <>
       <div className="wrapper">
         {VARIANTS.map(variant => {
-          const url = getRelativeURI(`/photography/${variant}1.jpg`)
+          const url = getRelativeURI(`/photography/${variant}0.jpg`)
           return (
-            <div
+            <Button
               key={variant}
-              tabIndex={0}
-              style={{ background: `url(${url}) no-repeat`, backgroundSize: '100%' }}
+              style={{ background: `url(${url}) no-repeat` }}
               onClick={() => {
                 setOpenVariant(variant)
               }}
-              onKeyPress={event => {
-                if (event.key === 'Enter') {
-                  event.preventDefault()
-                  setOpenVariant(variant)
-                }
-              }}
+              className={className}
             >
               <h1>{variant.toLocaleUpperCase()}</h1>
-            </div>
+            </Button>
           )
         })}
       </div>
@@ -45,6 +62,7 @@ export default function Photography() {
           }}
         />
       ))}
+      {styles}
       <style jsx>{`
         .wrapper {
           display: flex;
@@ -55,26 +73,10 @@ export default function Photography() {
           height: 100%;
         }
 
-        .wrapper > div {
-          opacity: 0.95;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-grow: 0;
-          flex-shrink: 0;
-          width: 16rem;
-          height: 9rem;
-          display: flex;
-          margin: 1.5rem;
-        }
-
-        .wrapper > div:hover {
-          opacity: 1;
-          cursor: pointer;
-        }
-
-        .wrapper > div > h1 {
+        h1 {
+          user-select: none;
           line-height: 1;
+          color: ${theme.colors.text};
           background-color: ${theme.colors.background};
         }
       `}</style>

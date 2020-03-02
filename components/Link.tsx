@@ -1,12 +1,23 @@
+import { ReactNode } from 'react'
 import NextLink from 'next/link'
-import { darken, lighten } from 'polished'
+import { lighten, darken } from 'polished'
 
 import useTheme from '../theme'
 import { getRelativeURI } from '../utils'
 
 const IPFS = process.env.IPFS === 'true'
 
-export default function Link({ href, children, asNextLink = false, ...rest }) {
+export default function Link({
+  href,
+  asNextLink = false,
+  children,
+  ...rest
+}: {
+  href: string
+  asNextLink?: boolean
+  children: ReactNode
+  [key: string]: any
+}) {
   const theme = useTheme()
 
   let as = href

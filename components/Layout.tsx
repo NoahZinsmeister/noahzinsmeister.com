@@ -48,10 +48,10 @@ export default function Layout({ children }) {
           )}
         </h1>
         <Emoji
-          style={{ height: 'fit-content' }}
           emoji={isDarkMode ? '🌘' : '🌔'}
           label={isDarkMode ? 'moon' : 'sun'}
           onClick={toggleDarkModeWithVibrate}
+          style={{ height: 'fit-content' }}
         />
       </div>
 
@@ -108,6 +108,7 @@ export default function Layout({ children }) {
         }
 
         .ipfs {
+          user-select: none;
           height: 24px;
         }
       `}</style>

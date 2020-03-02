@@ -90,11 +90,11 @@ function Content() {
         <Emoji emoji={'🎙'} label={'biography'} />
         <p className="text">
           I graduated from <span className="columbia">Columbia</span> with a B.A. in Economics-Mathematics in 2016.
-          After a close call with a PhD, I fell down the cryptocurrency rabbit hole. I'm now Engineering Lead at{' '}
+          After a close call with a PhD I fell far, far down the cryptocurrency rabbit hole. I'm now Engineering Lead at{' '}
           <Link className={className} href="https://uniswap.io">
             Uniswap
           </Link>
-          {styles} (a decentralized digital asset exchange built on{' '}
+          {styles}, a decentralized digital asset exchange built on{' '}
           <span
             onMouseEnter={() => {
               setE('Ξ')
@@ -105,12 +105,12 @@ function Content() {
           >
             {E}thereum
           </span>
-          ), and I also maintain <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link> (a
-          framework I created for building blockchain applications). In my spare time I like to ski, play games, and{' '}
+          , and I also maintain <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link>, a
+          framework I created for building blockchain applications. In my spare time I like to ski, play games, and{' '}
           <Link href="/photography" asNextLink>
             take photos
           </Link>{' '}
-          (which I once did for a <Link href="https://fingerlakesfeast.com/">cookbook</Link>).
+          (which I once did for a <Link href="https://fingerlakesfeast.com/">cookbook</Link>!).
         </p>
       </div>
       <div className="section">
