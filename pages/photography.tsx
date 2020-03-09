@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Head from 'next/head'
 import { resolve } from 'styled-jsx/css'
 
 import useTheme from '../theme'
@@ -35,9 +36,12 @@ export default function Photography() {
 
   return (
     <>
+      <Head>
+        <title>Noah Zinsmeister Photography</title>
+      </Head>
       <div className="wrapper">
         {VARIANTS.map(variant => {
-          const url = getRelativeURI(`/photography/${variant}0.jpg`)
+          const url = getRelativeURI(`/img/${variant}0.jpg`)
           return (
             <Button
               key={variant}

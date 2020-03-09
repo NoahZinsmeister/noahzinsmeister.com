@@ -1,15 +1,17 @@
 {
   "name": "noahzinsmeister.com",
-  "version": "0.1.0",
   "private": true,
   "engines": {
     "node": "^12"
   },
+  "license": "GPL-3.0-or-later",
   "scripts": {
-    "dev": "next dev",
-    "build": "rimraf .next out && next build && next export",
-    "build-ipfs": "rimraf .next out && IPFS=true next build && next export",
+    "dev": "next",
+    "dev-ipfs": "IPFS=true next",
+    "build": "rimraf .next out && next build",
+    "build-ipfs": "rimraf .next out && IPFS=true next build",
     "start": "next start",
+    "export": "next export",
     "deploy-ipfs": "node --experimental-modules ipfs-deploy.mjs"
   },
   "dependencies": {
@@ -27,21 +29,10 @@
     "@pinata/sdk": "^1.1.3",
     "@types/node": "^13.7.0",
     "@types/react": "^16.9.19",
-    "@typescript-eslint/eslint-plugin": "2.x",
-    "@typescript-eslint/parser": "^2.0.0",
-    "babel-eslint": "10.x",
-    "eslint": "6.x",
-    "eslint-config-react-app": "^5.0.2",
-    "eslint-plugin-flowtype": "3.x",
-    "eslint-plugin-import": "2.x",
-    "eslint-plugin-jsx-a11y": "6.x",
-    "eslint-plugin-react": "7.x",
-    "eslint-plugin-react-hooks": "1.x",
     "prettier": "^1.18.2",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8",
     "rimraf": "^3.0.1",
     "typescript": "^3.7.4"
-  },
-  "license": "GPL-3.0-or-later"
+  }
 }

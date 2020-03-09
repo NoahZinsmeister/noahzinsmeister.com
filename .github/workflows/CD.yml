@@ -30,6 +30,8 @@ jobs:
 
       - run: yarn build-ipfs
 
+      - run: yarn export
+
       - run: yarn deploy-ipfs
         env:
           PINATA_API_KEY: ${{ secrets.PINATA_API_KEY }}

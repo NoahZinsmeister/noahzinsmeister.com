@@ -1,5 +1,3 @@
-import { lighten } from 'polished'
-
 import { useDarkModeManager } from '../contexts/LocalStorage'
 
 enum Mode {
@@ -13,7 +11,7 @@ const BLACK = '#000000'
 
 const BACKGROUND = {
   [Mode.LIGHT]: WHITE,
-  [Mode.DARK]: lighten(0.025, BLACK)
+  [Mode.DARK]: BLACK
 }
 const TEXT = {
   [Mode.LIGHT]: BLACK,

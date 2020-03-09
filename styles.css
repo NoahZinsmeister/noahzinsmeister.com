@@ -1,9 +1,9 @@
-* {
-  outline-width: thin;
+body {
+  font-family: 'Inter', sans-serif;
 }
 
-body {
-  font-family: Roboto, sans-serif;
+* {
+  outline-width: thin;
 }
 
 /* https://hankchizljaw.com/wrote/a-modern-css-reset/ */

@@ -2,10 +2,10 @@ import { useState, useCallback, useEffect } from 'react'
 import { DialogOverlay, DialogContent } from '@reach/dialog'
 import Swiper from 'react-id-swiper'
 import { isMobile } from 'react-device-detect'
+import { transparentize } from 'polished'
 
 import { getRelativeURI } from '../utils'
 import { useKeyDown } from '../hooks'
-import { transparentize } from 'polished'
 import useTheme from '../theme'
 
 export enum Variant {
@@ -104,13 +104,13 @@ export default function Carousel({
             }}
           >
             {Array.from(Array(DATA[variant]).keys()).map(i => (
-              <img key={i} src={getRelativeURI(`/photography/${variant}${i}.jpg`)} alt="" />
+              <img key={i} src={getRelativeURI(`/img/${variant}${i}.jpg`)} alt="" />
             ))}
           </Swiper>
 
           <div className="thumbnail-wrapper">
             {Array.from(Array(DATA[variant]).keys()).map(i => {
-              const url = getRelativeURI(`/photography/${variant}${i}.jpg`)
+              const url = getRelativeURI(`/img/${variant}${i}.jpg`)
               const active = swiper !== null && i === swiper.realIndex
               return (
                 <button
@@ -130,7 +130,7 @@ export default function Carousel({
       <style jsx>{`
         :global([data-reach-dialog-overlay]) {
           background: rgba(255, 255, 255, 0.25);
-          backdrop-filter: blur(2px);
+          backdrop-filter: blur(4px);
           display: flex;
         }
 

@@ -1,10 +1,25 @@
 import { createContext, useContext, useReducer, useCallback, useMemo, useLayoutEffect, useEffect } from 'react'
 
-// top-level key
 const KEY = 'NOAHZINSMEISTER.COM'
 
-enum LocalStorageKey {
+enum Item {
   DARK_MODE
+}
+
+interface State {
+  [Item.DARK_MODE]: boolean
+}
+
+function initialize(): State {
+  const prefersDarkMode = window?.matchMedia('(prefers-color-scheme: dark)').matches ? true : false
+
+  let inDarkMode = prefersDarkMode
+  try {
+    const existingState = JSON.parse(window.localStorage.getItem(KEY))
+    inDarkMode = existingState[Item.DARK_MODE]
+  } catch {}
+
+  return { [Item.DARK_MODE]: inDarkMode }
 }
 
 enum Action {
@@ -12,34 +27,26 @@ enum Action {
   CHANGE_DARK_MODE
 }
 
-interface State {
-  [LocalStorageKey.DARK_MODE]: boolean
-}
-
-function initialize() {
-  return { [LocalStorageKey.DARK_MODE]: false }
-}
-
-const LocalStorageContext = createContext<[State, any]>([initialize(), {}])
-
-function useLocalStorageContext() {
-  return useContext(LocalStorageContext)
-}
-
 function reducer(_: State, { type, payload }) {
   switch (type) {
     case Action.INITIALIZE: {
       const { isDarkMode } = payload
-      return { [LocalStorageKey.DARK_MODE]: isDarkMode }
+      return { [Item.DARK_MODE]: isDarkMode }
     }
     case Action.CHANGE_DARK_MODE: {
       const { isDarkMode } = payload
-      return { [LocalStorageKey.DARK_MODE]: isDarkMode }
+      return { [Item.DARK_MODE]: isDarkMode }
     }
     default: {
       throw Error(`Unexpected action type '${type}' in LocalStorageContext reducer.`)
     }
   }
+}
+
+const LocalStorageContext = createContext<[State, any]>([{ [Item.DARK_MODE]: false }, {}])
+
+function useLocalStorageContext() {
+  return useContext(LocalStorageContext)
 }
 
 export default function Provider({ children }) {
@@ -49,22 +56,22 @@ export default function Provider({ children }) {
     dispatch({ type: Action.CHANGE_DARK_MODE, payload: { isDarkMode } })
   }, [])
 
-  useLayoutEffect(() => {
-    let existingState
-    try {
-      existingState = JSON.parse(window.localStorage.getItem(KEY)) ?? {}
-    } finally {
-      window?.localStorage.clear()
-    }
-    const isDarkMode =
-      typeof existingState[LocalStorageKey.DARK_MODE] === 'boolean'
-        ? existingState[LocalStorageKey.DARK_MODE]
-        : window?.matchMedia('(prefers-color-scheme: dark)').matches
-        ? true
-        : false
-    dispatch({ type: Action.INITIALIZE, payload: { isDarkMode } })
-  }, [])
+  return (
+    <LocalStorageContext.Provider value={useMemo(() => [state, { changeDarkMode }], [state, changeDarkMode])}>
+      {children}
+    </LocalStorageContext.Provider>
+  )
+}
 
+export function Updater() {
+  const [state, { changeDarkMode }] = useLocalStorageContext()
+
+  // sync state to local storage
+  useEffect(() => {
+    window?.localStorage.setItem(KEY, JSON.stringify(state))
+  })
+
+  // sync state to preferred color scheme changes
   useEffect(() => {
     window?.matchMedia('(prefers-color-scheme: dark)').addListener(event => {
       if (event.matches) changeDarkMode(true)
@@ -74,31 +81,18 @@ export default function Provider({ children }) {
     })
   }, [changeDarkMode])
 
-  return (
-    <LocalStorageContext.Provider value={useMemo(() => [state, { changeDarkMode }], [state, changeDarkMode])}>
-      {children}
-    </LocalStorageContext.Provider>
-  )
-}
-
-export function Updater() {
-  const [state] = useLocalStorageContext()
-
-  useEffect(() => {
-    window?.localStorage.setItem(KEY, JSON.stringify(state))
-  })
-
   return null
 }
 
 export function useDarkModeManager(): [boolean, () => void] {
   const [state, { changeDarkMode }] = useLocalStorageContext()
 
-  const isDarkMode = state[LocalStorageKey.DARK_MODE]
+  const inDarkMode = state[Item.DARK_MODE]
 
   const toggleDarkMode = useCallback(() => {
-    changeDarkMode(!isDarkMode)
-  }, [changeDarkMode, isDarkMode])
+    changeDarkMode(!inDarkMode)
+    window?.navigator?.vibrate(125)
+  }, [inDarkMode, changeDarkMode])
 
-  return [isDarkMode, toggleDarkMode]
+  return [inDarkMode, toggleDarkMode]
 }

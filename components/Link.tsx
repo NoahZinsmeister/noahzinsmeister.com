@@ -2,10 +2,8 @@ import { ReactNode } from 'react'
 import NextLink from 'next/link'
 import { lighten, darken } from 'polished'
 
+import { isIPFS, getRelativeURI } from '../utils'
 import useTheme from '../theme'
-import { getRelativeURI } from '../utils'
-
-const IPFS = process.env.IPFS === 'true'
 
 export default function Link({
   href,
@@ -20,10 +18,7 @@ export default function Link({
 }) {
   const theme = useTheme()
 
-  let as = href
-  if (IPFS) {
-    as = getRelativeURI(`${as}${as === '/' ? '' : '.html'}`)
-  }
+  const as = asNextLink && isIPFS ? getRelativeURI(`${href}${href === '/' ? '' : '.html'}`) : href
 
   return (
     <>

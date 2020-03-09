@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import Head from 'next/head'
 import { resolve } from 'styled-jsx/css'
 import copy from 'copy-to-clipboard'
 
@@ -41,6 +42,9 @@ export default function Index() {
 
   return (
     <>
+      <Head>
+        <title>Noah Zinsmeister</title>
+      </Head>
       <div className="links">
         <div className="link-wrapper">
           <Link href="https://github.com/NoahZinsmeister">GitHub</Link>

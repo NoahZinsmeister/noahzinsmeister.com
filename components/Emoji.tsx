@@ -20,11 +20,13 @@ function BaseEmoji({
       </span>
       <style jsx>{`
         span {
-          line-height: ${size};
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
           font-size: ${size};
+          line-height: 1;
           width: ${size};
-          min-width: ${size};
-          max-width: ${size};
+          height: ${size};
         }
       `}</style>
     </>
