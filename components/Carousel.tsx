@@ -104,13 +104,13 @@ export default function Carousel({
             }}
           >
             {Array.from(Array(DATA[variant]).keys()).map(i => (
-              <img key={i} src={`./img/${variant}${i}.jpg`} alt="" />
+              <img key={i} src={getRelativeURI(`./img/${variant}${i}.jpg`)} alt="" />
             ))}
           </Swiper>
 
           <div className="thumbnail-wrapper">
             {Array.from(Array(DATA[variant]).keys()).map(i => {
-              const url = `./img/${variant}${i}.jpg`
+              const url = getRelativeURI(`./img/${variant}${i}.jpg`)
               const active = swiper !== null && i === swiper.realIndex
               return (
                 <button

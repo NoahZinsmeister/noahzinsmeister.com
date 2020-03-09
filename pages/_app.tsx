@@ -35,8 +35,8 @@ function ClientSideRoot({ Component }) {
         window.location.origin, // e.g. https://ipfs.io"
         window.location.pathname
           .split('/')
-          .slice(0, 3)
-          .join('/') // e.g. /ipns/noahzinsmeister.com
+          .slice(0, 4)
+          .join('/') // e.g. /ipns/noahzinsmeister.com/
       )
 
     return (
