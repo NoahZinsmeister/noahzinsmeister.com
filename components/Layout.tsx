@@ -20,7 +20,7 @@ export default function Layout({ children }) {
         <h1 className="title" style={{ lineHeight: 1 }}>
           {isPhotography ? (
             <>
-              <Link href="../" style={{ color: 'unset' }}>
+              <Link href="/" style={{ color: 'unset' }}>
                 Noah
                 <br />
                 Zinsmeister

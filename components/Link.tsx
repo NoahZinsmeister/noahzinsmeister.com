@@ -3,6 +3,8 @@ import NextLink from 'next/link'
 import { lighten, darken } from 'polished'
 
 import useTheme from '../theme'
+import { useRouter } from 'next/router'
+import { isIPFS } from '../utils'
 
 export default function Link({
   href,
@@ -16,11 +18,15 @@ export default function Link({
   [key: string]: any
 }) {
   const theme = useTheme()
+  const { route } = useRouter()
+
+  const isHome = route === '/'
 
   return (
     <>
-      {href.slice(0, 1) === '.' ? (
-        <NextLink href={href} as={`${href}.html`}>
+      {href.slice(0, 1) === '/' ? (
+        // note that the below assumes <= 1 level of page nesting
+        <NextLink href={href === '/' ? (isHome ? './' : '../') : `.${href}${isIPFS ? '.html' : ''}`}>
           <a {...rest}>{children}</a>
         </NextLink>
       ) : (
