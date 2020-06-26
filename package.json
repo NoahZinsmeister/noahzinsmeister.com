@@ -7,10 +7,8 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next",
-    "prebuild": "next build",
-    "build": "next export",
-    "prebuild-ipfs": "IPFS=true next build",
-    "build-ipfs": "next export",
+    "build": "next build && next export",
+    "build-ipfs": "IPFS=true next build && next export",
     "deploy-ipfs": "node --experimental-modules ipfs-deploy.mjs"
   },
   "dependencies": {
