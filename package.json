@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build && next export",
+    "start": "next start",
     "build-ipfs": "IPFS=true next build && next export",
     "deploy-ipfs": "node --experimental-modules ipfs-deploy.mjs"
   },
