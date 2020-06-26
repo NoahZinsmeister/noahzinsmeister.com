@@ -9,8 +9,7 @@
     "dev": "next",
     "build": "next build && next export",
     "start": "next start",
-    "build-ipfs": "IPFS=true next build && next export",
-    "update-dnslink": "node --experimental-modules update-dnslink.mjs"
+    "build-ipfs": "IPFS=true next build && next export"
   },
   "dependencies": {
     "@reach/dialog": "^0.10.5",
