@@ -19,7 +19,7 @@ async function main() {
 
   // delete the existing dnslink record from vercel
   await request
-    .delete(`https://api.vercel.co/v2/domains/${DOMAIN}/records/${record.id}`, {
+    .delete(`https://api.vercel.com/v2/domains/${DOMAIN}/records/${record.id}`, {
       auth: {
         bearer: process.env.VERCEL_TOKEN
       },
@@ -31,7 +31,7 @@ async function main() {
 
   // add the new dnslink record to zeit
   await request
-    .post(`https://api.vercel.co/v2/domains/${DOMAIN}/records`, {
+    .post(`https://api.vercel.com/v2/domains/${DOMAIN}/records`, {
       auth: {
         bearer: process.env.VERCEL_TOKEN
       },
