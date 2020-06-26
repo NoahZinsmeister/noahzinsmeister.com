@@ -3,7 +3,6 @@ import Head from 'next/head'
 import { resolve } from 'styled-jsx/css'
 
 import useTheme from '../theme'
-import { getRelativeURI } from '../utils'
 import Carousel, { Variant } from '../components/Carousel'
 import Button from '../components/Button'
 
@@ -32,7 +31,7 @@ const { className, styles } = resolve`
 
 export default function Photography() {
   const theme = useTheme()
-  const [openVariant, setOpenVariant] = useState()
+  const [openVariant, setOpenVariant] = useState<Variant>()
 
   return (
     <>
@@ -41,7 +40,7 @@ export default function Photography() {
       </Head>
       <div className="wrapper">
         {VARIANTS.map(variant => {
-          const url = getRelativeURI(`/img/${variant}0.jpg`)
+          const url = `./img/${variant}0.jpg`
           return (
             <Button
               key={variant}

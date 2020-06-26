@@ -7,23 +7,22 @@
   "license": "GPL-3.0-or-later",
   "scripts": {
     "dev": "next",
-    "dev-ipfs": "IPFS=true next",
-    "build": "rimraf .next out && next build",
-    "build-ipfs": "rimraf .next out && IPFS=true next build",
-    "start": "next start",
-    "export": "next export",
+    "prebuild": "next build",
+    "build": "next export",
+    "prebuild-ipfs": "IPFS=true next build",
+    "build-ipfs": "next export",
     "deploy-ipfs": "node --experimental-modules ipfs-deploy.mjs"
   },
   "dependencies": {
-    "@reach/dialog": "^0.8.5",
-    "copy-to-clipboard": "^3.2.0",
-    "next": "^9.3.2",
-    "polished": "^3.4.2",
-    "react": "^16.12.0",
-    "react-device-detect": "^1.11.14",
-    "react-dom": "^16.12.0",
-    "react-id-swiper": "^2.4.0",
-    "swiper": "^5.3.1"
+    "@reach/dialog": "^0.10.5",
+    "copy-to-clipboard": "^3.3.1",
+    "next": "^9.4.4",
+    "polished": "^3.6.5",
+    "react": "^16.13.1",
+    "react-device-detect": "^1.13.1",
+    "react-dom": "^16.13.1",
+    "react-id-swiper": "^4.0.0",
+    "swiper": "^5.4.5"
   },
   "devDependencies": {
     "@pinata/sdk": "^1.1.3",
@@ -32,7 +31,6 @@
     "prettier": "^1.18.2",
     "request": "^2.88.0",
     "request-promise-native": "^1.0.8",
-    "rimraf": "^3.0.1",
     "typescript": "^3.7.4"
   }
 }

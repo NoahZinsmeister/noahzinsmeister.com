@@ -1,66 +1,56 @@
-import { useState, useEffect } from 'react'
+import { useState, useLayoutEffect, useEffect } from 'react'
 import App from 'next/app'
 import Head from 'next/head'
-import { resolve } from 'url'
 
-import { isIPFS, getRelativeURI } from '../utils'
 import LocalStorageContext, { Updater as LocalStorageContextUpdater } from '../contexts/LocalStorage'
 import useTheme from '../theme'
+import { isServerSide } from '../utils'
+import Base from '../components/Base'
 import Layout from '../components/Layout'
 
-import '../styles.css'
 import 'swiper/css/swiper.css'
 import '@reach/dialog/styles.css'
+
+import '../styles.css'
+
+const useIsomorphicLayoutEffect = isServerSide ? useEffect : useLayoutEffect
 
 export default class extends App {
   render() {
     const { Component } = this.props
-    return <ClientSideRoot Component={Component} />
+    return (
+      <>
+        <Base />
+        <ClientSideRoot Component={Component} />
+      </>
+    )
   }
 }
 
 // exists to short-circuit rendering until we are client-side
 function ClientSideRoot({ Component }) {
-  const [blocked, setBlocked] = useState(true)
-  useEffect(() => {
-    setBlocked(false)
+  const [painted, setPainted] = useState(false)
+  useIsomorphicLayoutEffect(() => {
+    setPainted(true)
   }, [])
 
-  if (blocked) {
+  if (!painted) {
     return null
-  } else {
-    const IPFSBase =
-      isIPFS &&
-      resolve(
-        window.location.origin, // e.g. https://ipfs.io"
-        window.location.pathname
-          .split('/')
-          .slice(0, 3)
-          .join('/') + '/' // e.g. /ipns/noahzinsmeister.com/
-      )
-
-    return (
-      <>
-        {isIPFS && (
-          <Head>
-            <base href={IPFSBase} />
-          </Head>
-        )}
-
-        <LocalStorageContext>
-          <LocalStorageContextUpdater />
-          <Content Component={Component} />
-        </LocalStorageContext>
-      </>
-    )
   }
+
+  return (
+    <LocalStorageContext>
+      <LocalStorageContextUpdater />
+      <Content Component={Component} />
+    </LocalStorageContext>
+  )
 }
 
 // highest-level component in which we can access LocalStorageContext
 function Content({ Component }) {
   const theme = useTheme()
 
-  const favicon = getRelativeURI(`/favicon${theme.isDarkMode ? '-dark' : ''}.ico`)
+  const favicon = `./favicon${theme.isDarkMode ? '-dark' : ''}.ico`
 
   return (
     <>

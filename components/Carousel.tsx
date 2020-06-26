@@ -1,10 +1,9 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useCallback, useRef, useState, useEffect } from 'react'
 import { DialogOverlay, DialogContent } from '@reach/dialog'
 import Swiper from 'react-id-swiper'
 import { isMobile } from 'react-device-detect'
 import { transparentize } from 'polished'
 
-import { getRelativeURI } from '../utils'
 import { useKeyDown } from '../hooks'
 import useTheme from '../theme'
 
@@ -37,43 +36,23 @@ export default function Carousel({
 }) {
   const theme = useTheme()
 
-  const [swiper, updateSwiper] = useState(null)
+  const ref = useRef(null)
+
   const goPrevious = useCallback(() => {
-    if (swiper !== null) {
-      swiper.slidePrev()
+    if (ref?.current?.swiper !== null) {
+      ref.current.swiper.slidePrev()
     }
-  }, [swiper])
+  }, [])
   const goNext = useCallback(() => {
-    if (swiper !== null) {
-      swiper.slideNext()
-    }
-  }, [swiper])
+    ref?.current?.swiper?.slideNext()
+  }, [])
   const goTo = useCallback(
     (i: number) =>
       function() {
-        if (swiper !== null) {
-          swiper.slideToLoop(i)
-        }
+        ref?.current?.swiper?.slideToLoop(i)
       },
-    [swiper]
+    []
   )
-
-  const [, forceRerender] = useState(0)
-  useEffect(() => {
-    if (swiper !== null) {
-      const force = () => {
-        forceRerender(i => i + 1)
-      }
-      swiper?.on('init', force)
-      swiper?.on('slideChange', force)
-      swiper?.on('loopFix', force)
-      return () => {
-        swiper?.off('init', force)
-        swiper?.off('slideChange', force)
-        swiper?.off('loopFix', force)
-      }
-    }
-  }, [swiper])
 
   useKeyDown('ArrowLeft', goPrevious, !isOpen, false)
   useKeyDown('ArrowRight', goNext, !isOpen, false)
@@ -96,7 +75,7 @@ export default function Carousel({
             </>
           )}
           <Swiper
-            getSwiper={updateSwiper}
+            ref={ref}
             {...{
               effect: 'coverflow',
               spaceBetween: 30,
@@ -104,21 +83,19 @@ export default function Carousel({
             }}
           >
             {Array.from(Array(DATA[variant]).keys()).map(i => (
-              <img key={i} src={getRelativeURI(`/img/${variant}${i}.jpg`)} alt="" />
+              <img key={i} src={`./img/${variant}${i}.jpg`} alt="" />
             ))}
           </Swiper>
 
           <div className="thumbnail-wrapper">
             {Array.from(Array(DATA[variant]).keys()).map(i => {
-              const url = getRelativeURI(`/img/${variant}${i}.jpg`)
-              const active = swiper !== null && i === swiper.realIndex
+              const url = `./img/${variant}${i}.jpg`
               return (
                 <button
                   key={i}
                   onClick={goTo(i)}
                   style={{
-                    ...{ background: `url(${url}) no-repeat` },
-                    ...(active ? { border: `1px solid ${theme.colors.link}` } : { opacity: 0.9 })
+                    ...{ background: `url(${url}) no-repeat` }
                   }}
                 />
               )
