@@ -25,8 +25,8 @@ export default function Link({
   return (
     <>
       {href.slice(0, 1) === '/' ? (
-        // note that the below assumes <= 1 level of page nesting
-        <NextLink href={href === '/' ? (isHome ? './' : '../') : `.${href}${isIPFS ? '.html' : ''}`}>
+        // note that the below assumes no more than a single level of page nesting
+        <NextLink href={href === '/' ? './' : `.${href}${isIPFS ? '.html' : ''}`}>
           <a {...rest}>{children}</a>
         </NextLink>
       ) : (
