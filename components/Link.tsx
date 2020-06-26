@@ -20,7 +20,7 @@ export default function Link({
   return (
     <>
       {href.slice(0, 1) === '.' ? (
-        <NextLink href={href}>
+        <NextLink href={href} as={`${href}.html`}>
           <a {...rest}>{children}</a>
         </NextLink>
       ) : (

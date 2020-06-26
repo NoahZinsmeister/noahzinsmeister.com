@@ -4,7 +4,11 @@ import Head from 'next/head'
 import { isIPFS, isServerSide } from '../utils'
 
 export default function Base(): JSX.Element {
-  let href: string = isServerSide ? '/' : resolve(window.location.origin, '/')
+  if (isServerSide) {
+    return null
+  }
+
+  let href: string = resolve(window.location.origin, '/')
 
   if (!isServerSide && isIPFS) {
     // ipfs gateway of the format https://ipfs.io/ipns/noahzinsmeister.com/

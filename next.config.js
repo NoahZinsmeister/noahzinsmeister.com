@@ -4,6 +4,5 @@ module.exports = {
   env: {
     IPFS: process.env.IPFS === 'true' ? 'true' : 'false',
     COMMIT_SHA: process.env.VERCEL_GITHUB_COMMIT_SHA || process.env.GITHUB_SHA || 'master'
-  },
-  exportTrailingSlash: true
+  }
 }
