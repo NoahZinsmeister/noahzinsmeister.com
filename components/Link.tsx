@@ -3,7 +3,6 @@ import NextLink from 'next/link'
 import { lighten, darken } from 'polished'
 
 import useTheme from '../theme'
-import { useRouter } from 'next/router'
 import { isIPFS } from '../utils'
 
 export default function Link({
@@ -18,9 +17,6 @@ export default function Link({
   [key: string]: any
 }) {
   const theme = useTheme()
-  const { route } = useRouter()
-
-  const isHome = route === '/'
 
   return (
     <>
