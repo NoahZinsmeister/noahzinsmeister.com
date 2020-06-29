@@ -4,23 +4,24 @@ import Head from 'next/head'
 import { isIPFS, isServerSide } from '../utils'
 
 export default function Base(): JSX.Element {
+  // during SSR/SSG, don't specify a base tag
   if (isServerSide) {
     return null
   }
 
+  // on the client, specify a "default" base tag, e.g. https://noahzinsmeister.com/
   let href: string = resolve(window.location.origin, '/')
 
-  if (!isServerSide && isIPFS) {
-    // ipfs gateway of the format https://ipfs.io/ipns/noahzinsmeister.com/
-    if (['ipfs', 'ipns'].some(identifier => identifier === window.location.pathname.split('/')[1])) {
-      href = resolve(
-        window.location.origin, // https://ipfs.io"
-        window.location.pathname
-          .split('/')
-          .slice(0, 3)
-          .join('/') + '/' // /ipns/noahzinsmeister.com + /
-      )
-    }
+  // on the client, if this was an IPFS build, and if it seems like we're being served from a gateway of the form
+  // e.g. https://ipfs.io/ipns/noahzinsmeister.com/, specify a base tag of the gateway root for this page
+  if (isIPFS && ['ipfs', 'ipns'].some(identifier => identifier === window.location.pathname.split('/')[1])) {
+    href = resolve(
+      window.location.origin, // https://ipfs.io"
+      window.location.pathname // /ipns/noahzinsmeister.com/
+        .split('/')
+        .slice(0, 3)
+        .join('/') + '/'
+    )
   }
 
   return (
