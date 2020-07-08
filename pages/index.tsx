@@ -94,7 +94,8 @@ function Content() {
         <Emoji emoji={'🎙'} label={'biography'} />
         <p className="text">
           I graduated from <span className="columbia">Columbia</span> with a B.A. in Economics-Mathematics in 2016.
-          After a close call with a PhD I fell far, far down the cryptocurrency rabbit hole. I'm now Engineering Lead at{' '}
+          After a close call with a PhD I fell far, far down the cryptocurrency rabbit hole. I'm currently Engineering
+          Lead at{' '}
           <Link className={className} href="https://uniswap.io">
             Uniswap
           </Link>
@@ -111,9 +112,39 @@ function Content() {
           </span>
           , and I also maintain <Link href="https://github.com/NoahZinsmeister/web3-react">web3-react</Link>, a
           framework I created for building blockchain applications. In my spare time I like to ski, play games, and{' '}
-          <Link href="/photography">take photos</Link> (which I once did for a{' '}
-          <Link href="https://fingerlakesfeast.com/">cookbook</Link>!).
+          <Link href="/photography">take photos</Link>!
         </p>
+      </div>
+      <div className="section">
+        <Emoji emoji={'✒️'} label={'articles'} />
+        <ul className="list">
+          <li>
+            <Link href="https://uniswap.org/whitepaper.pdf">Uniswap v2 Core</Link>
+            <br />
+            <code>2020-03-01</code>
+          </li>
+          <li>
+            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
+              The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
+            </Link>
+            <br />
+            <code>2017-10-04</code>
+          </li>
+          <li>
+            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
+              Excess Funding Capacity in Tri-Party Repo
+            </Link>
+            <br />
+            <code>2017-10-02</code>
+          </li>
+          <li>
+            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
+              Regulatory Incentives and Quarter-End Dynamics in the Repo Market
+            </Link>
+            <br />
+            <code>2017-08-07</code>
+          </li>
+        </ul>
       </div>
       <div className="section">
         <Emoji emoji={'🎬'} label={'videos'} />
@@ -141,28 +172,15 @@ function Content() {
         </ul>
       </div>
       <div className="section">
-        <Emoji emoji={'✒️'} label={'articles'} />
+        <Emoji emoji={'📷'} label={'photography'} />
         <ul className="list">
           <li>
-            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html">
-              The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
-            </Link>
-            <br />
-            <code>2017-10-04</code>
+            <Link href="/photography">Noah Zinsmeister Photography</Link>
           </li>
           <li>
-            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html">
-              Excess Funding Capacity in Tri-Party Repo
-            </Link>
+            <Link href="https://fingerlakesfeast.com/">Finger Lakes Feast</Link>
             <br />
-            <code>2017-10-02</code>
-          </li>
-          <li>
-            <Link href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html">
-              Regulatory Incentives and Quarter-End Dynamics in the Repo Market
-            </Link>
-            <br />
-            <code>2017-08-07</code>
+            <code>2012-10-05</code>
           </li>
         </ul>
       </div>
