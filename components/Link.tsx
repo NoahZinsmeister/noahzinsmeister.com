@@ -5,24 +5,13 @@ import { lighten, darken } from 'polished'
 import useTheme from '../theme'
 import { isIPFS } from '../utils'
 
-export default function Link({
-  href,
-  asNextLink = false,
-  children,
-  ...rest
-}: {
-  href: string
-  asNextLink?: boolean
-  children: ReactNode
-  [key: string]: any
-}) {
+export default function Link({ href, children, ...rest }: { href: string; children: ReactNode; [key: string]: any }) {
   const theme = useTheme()
 
   return (
     <>
       {href.slice(0, 1) === '/' ? (
-        // note that the below assumes no more than a single level of page nesting
-        <NextLink href={href} as={href === '/' ? './' : `.${href}${isIPFS ? '.html' : ''}`}>
+        <NextLink href={`.${href}`} as={href === '/' ? './' : `.${href}${isIPFS ? '.html' : ''}`}>
           <a {...rest}>{children}</a>
         </NextLink>
       ) : (
