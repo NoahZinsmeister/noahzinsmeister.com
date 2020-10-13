@@ -11,7 +11,7 @@ export default function Link({ href, children, ...rest }: { href: string; childr
   return (
     <>
       {href.slice(0, 1) === '/' ? (
-        <NextLink href={`.${href}`} as={href === '/' ? './' : `.${href}${isIPFS ? '.html' : ''}`}>
+        <NextLink href={href} as={href === '/' ? './' : `.${href}${isIPFS ? '.html' : ''}`}>
           <a {...rest}>{children}</a>
         </NextLink>
       ) : (
