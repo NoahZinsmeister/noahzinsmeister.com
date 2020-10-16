@@ -19,7 +19,7 @@ export default function Index() {
   const [copied, setCopied] = useState(false)
 
   function copyEmail() {
-    copy('noahwz@gmail.com')
+    copy('noahwz@pm.me')
     setCopied(true)
     try {
       window.navigator.vibrate(125)
@@ -53,7 +53,7 @@ export default function Index() {
           <Link href="https://twitter.com/NoahZinsmeister">Twitter</Link>
         </div>
         <div className="link-wrapper">
-          <Link href="mailto:noahwz@gmail.com">Email</Link>
+          <Link href="mailto:noahwz@pm.me">Email</Link>
           <Emoji
             style={{ marginLeft: '.5rem' }}
             size={'1.25rem'}
