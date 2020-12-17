@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import NextLink from 'next/link'
 import { lighten, darken } from 'polished'
+import { UrlObject } from 'url'
 
 import useTheme from '../theme'
 import { isIPFS } from '../utils'
@@ -11,9 +12,15 @@ export default function Link({ href, children, ...rest }: { href: string; childr
   return (
     <>
       {href.slice(0, 1) === '/' ? (
-        <NextLink href={href} as={href === '/' ? './' : `.${href}${isIPFS ? '.html' : ''}`}>
-          <a {...rest}>{children}</a>
-        </NextLink>
+        isIPFS ? (
+          <a href={`.${href}${href === '/' ? '' : '.html'}`} {...rest}>
+            {children}
+          </a>
+        ) : (
+          <NextLink href={href}>
+            <a {...rest}>{children}</a>
+          </NextLink>
+        )
       ) : (
         <a target="_blank" rel="noopener noreferrer" href={href} {...rest}>
           {children}
