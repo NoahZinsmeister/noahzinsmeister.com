@@ -67,7 +67,6 @@ export default function Layout({ children }) {
           flex-direction: column;
           width: 100vw;
           min-height: 100vh;
-          overflow: hidden;
         }
 
         .header {
@@ -89,7 +88,7 @@ export default function Layout({ children }) {
           flex: 0 1 auto;
           justify-content: ${isIPFS ? 'space-between' : 'flex-end'};
           align-items: flex-end;
-          padding: 2rem;
+          padding: 0 2rem 2rem 2rem;
         }
 
         .ipfs {

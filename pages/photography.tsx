@@ -37,6 +37,7 @@ export default function Photography() {
     <>
       <Head>
         <title>Noah Zinsmeister Photography</title>
+        <meta key="description" name="Description" content="Noah Zinsmeister Photography" />
       </Head>
       <div className="wrapper">
         {VARIANTS.map(variant => {

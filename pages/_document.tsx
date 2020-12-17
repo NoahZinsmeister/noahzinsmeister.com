@@ -5,11 +5,10 @@ export default class extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta name="Description" content="Noah Zinsmeister" />
           <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
         </Head>
 
-        <body>
+        <body style={{ overflowX: 'hidden' }}>
           <Main />
           <NextScript />
         </body>

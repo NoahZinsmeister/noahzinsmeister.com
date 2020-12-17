@@ -44,6 +44,7 @@ export default function Index() {
     <>
       <Head>
         <title>Noah Zinsmeister</title>
+        <meta key="description" name="Description" content="Noah Zinsmeister" />
       </Head>
       <div className="links">
         <div className="link-wrapper">
@@ -179,8 +180,6 @@ function Content() {
           </li>
           <li>
             <Link href="https://fingerlakesfeast.com/">Finger Lakes Feast</Link>
-            <br />
-            <code>2012-10-05</code>
           </li>
         </ul>
       </div>
