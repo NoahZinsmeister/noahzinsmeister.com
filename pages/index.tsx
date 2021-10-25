@@ -120,6 +120,11 @@ function Content() {
         <Emoji emoji={'✒️'} label={'articles'} />
         <ul className="list">
           <li>
+            <Link href="https://uniswap.org/whitepaper-v3.pdf">Uniswap v3 Core</Link>
+            <br />
+            <code>2021-03-01</code>
+          </li>
+          <li>
             <Link href="https://uniswap.org/whitepaper.pdf">Uniswap v2 Core</Link>
             <br />
             <code>2020-03-01</code>
@@ -151,13 +156,24 @@ function Content() {
         <Emoji emoji={'🎬'} label={'videos'} />
         <ul className="list">
           <li>
+            <Link href="https://www.youtube.com/watch?v=vb5M1KSR43E">Uniswap v3</Link>
+            <br />
+            <code>2021-08-09</code>
+          </li>
+          <li>
+            <Link href="https://drive.google.com/file/d/1dRifSAXxc-6HKCKH8tcygEmHxJTKAlxp/view">
+              Uniswap v3 Code Walkthrough
+            </Link>
+            <br />
+            <code>2021-04-01</code>
+          </li>
+          <li>
             <Link href="https://www.youtube.com/watch?v=gRBCD5nzBdQ&t=18269">
               DeFi: Composability, Adoption & What's Next
             </Link>
             <br />
             <code>2020-02-15</code>
           </li>
-
           <li>
             <Link href="https://www.youtube.com/watch?v=wSUwFVp4Fn4&t=25589">DeFi's Real vs Expected Users</Link>
             <br />
