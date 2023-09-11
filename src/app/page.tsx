@@ -27,7 +27,7 @@ export default function Page() {
       <div className={styles.content}>
         <div className={styles.section}>
           <h1 role="img">🎙️</h1>
-          <p>
+          <p className={styles.description}>
             I&apos;m a programmer and technologist based in Brooklyn, NY. I
             studied Economics-Mathematics at Columbia, and after a close call
             with a PhD I fell down the cryptocurrency rabbit hole. At the moment

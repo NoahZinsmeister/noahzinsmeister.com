@@ -50,3 +50,7 @@
 .writing > small, .photography > a {
   margin-bottom: .75rem;
 }
+
+.description {
+  max-width: 50rem;
+}
