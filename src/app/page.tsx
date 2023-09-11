@@ -1,94 +1,85 @@
-import Image from 'next/image'
+import Link from 'next/link'
 import styles from './page.module.css'
 
-export default function Home() {
+export default function Page() {
   return (
     <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
+      <div className={styles.header}>
+        <h1>
+          Noah
+          <br />
+          Zinsmeister
+        </h1>
       </div>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
+      <div className={styles.links}>
+        <a href="mailto:noahwz@pm.me" target="_blank">
+          Email
+        </a>
+        <a href="https://twitter.com/NoahZinsmeister" target="_blank">
+          Twitter
+        </a>
+        <a href="https://github.com/NoahZinsmeister" target="_blank">
+          GitHub
+        </a>
       </div>
 
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
+      <div className={styles.content}>
+        <div className={styles.section}>
+          <h1 role="img">🎙️</h1>
           <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
+            I&apos;m a programmer and technologist based in Brooklyn, NY. I
+            studied Economics-Mathematics at Columbia, and after a close call
+            with a PhD I fell down the cryptocurrency rabbit hole. At the moment
+            I&apos;m working on some personal projects, and in my free time I
+            enjoy tennis, vegetarian food, motorcycles, and wine.
           </p>
-        </a>
+        </div>
+
+        <div className={styles.section}>
+          <h1 role="img">🖊️</h1>
+          <p className={styles.writing}>
+            <a href="https://uniswap.org/whitepaper-v3.pdf" target="_blank">
+              Uniswap v3
+            </a>
+            <small>2021</small>
+            <a href="https://uniswap.org/whitepaper.pdf" target="_blank">
+              Uniswap v2
+            </a>
+            <small>2020</small>
+            <a
+              href="https://libertystreeteconomics.newyorkfed.org/2017/10/the-cost-and-duration-of-excess-funding-capacity-in-tri-party-repo.html"
+              target="_blank"
+            >
+              The Cost and Duration of Excess Funding Capacity in Tri-Party Repo
+            </a>
+            <small>2017</small>
+            <a
+              href="https://libertystreeteconomics.newyorkfed.org/2017/10/excess-funding-capacity-in-tri-party-repo.html"
+              target="_blank"
+            >
+              Excess Funding Capacity in Tri-Party Repo
+            </a>
+            <small>2017</small>
+            <a
+              href="https://libertystreeteconomics.newyorkfed.org/2017/08/regulatory-incentives-and-quarter-end-dynamics-in-the-repo-market.html"
+              target="_blank"
+            >
+              Regulatory Incentives and Quarter-End Dynamics in the Repo Market
+            </a>
+            <small>2017</small>
+          </p>
+        </div>
+
+        <div className={styles.section}>
+          <h1 role="img">📷</h1>
+          <p className={styles.photography}>
+            <Link href="/photography">Noah Zinsmeister Photography</Link>
+            <a href="https://fingerlakesfeast.com" target="_blank">
+              Finger Lakes Feast
+            </a>
+          </p>
+        </div>
       </div>
     </main>
   )
