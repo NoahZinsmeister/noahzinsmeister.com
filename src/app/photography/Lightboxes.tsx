@@ -34,37 +34,35 @@ export default function Lightboxes() {
   ]
 
   return (
-    <>
-      <div className={styles.yMargin}>
-        <div className={styles.container}>
-          {slidesList.map(({ name, slides }, i) => {
-            const { open, set } = stateList[i]
+    <div className={styles.yMargin}>
+      <div className={styles.container}>
+        {slidesList.map(({ name, slides }, i) => {
+          const { open, set } = stateList[i]
 
-            return (
-              <Fragment key={i}>
-                <button
-                  type="button"
-                  style={{
-                    background: `url('${name.toLowerCase()}0.jpg') no-repeat`,
-                  }}
-                  onClick={() => set(true)}
-                >
-                  <span>
-                    <h1>{name}</h1>
-                  </span>
-                </button>
+          return (
+            <Fragment key={i}>
+              <button
+                type="button"
+                style={{
+                  background: `url('${name.toLowerCase()}0.jpg') no-repeat`,
+                }}
+                onClick={() => set(true)}
+              >
+                <span>
+                  <h1>{name}</h1>
+                </span>
+              </button>
 
-                <Lightbox
-                  open={open}
-                  close={() => set(false)}
-                  slides={slides}
-                  render={{ slide: NextJsImage }}
-                />
-              </Fragment>
-            )
-          })}
-        </div>
+              <Lightbox
+                open={open}
+                close={() => set(false)}
+                slides={slides}
+                render={{ slide: NextJsImage }}
+              />
+            </Fragment>
+          )
+        })}
       </div>
-    </>
+    </div>
   )
 }

@@ -1,3 +1,4 @@
+// from https://yet-another-react-lightbox.com/examples/nextjs
 import Image, { StaticImageData } from 'next/image'
 import {
   RenderSlideProps,
@@ -7,8 +8,6 @@ import {
   useLightboxProps,
 } from 'yet-another-react-lightbox'
 
-// from https://yet-another-react-lightbox.com/examples/nextjs
-
 function isNextJsImage(slide: Slide): slide is StaticImageData {
   return (
     isImageSlide(slide) &&
@@ -17,10 +16,6 @@ function isNextJsImage(slide: Slide): slide is StaticImageData {
   )
 }
 
-/*
- * For JavaScript version of this sandbox please visit
- * https://codesandbox.io/p/sandbox/yet-another-react-lightbox-nextjs-bfjgb0?file=%2Fpages%2Findex.jsx
- */
 export default function NextJsImage({
   slide,
   rect,
@@ -51,6 +46,7 @@ export default function NextJsImage({
         loading="eager"
         draggable={false}
         placeholder={slide.blurDataURL ? 'blur' : undefined}
+        quality={100}
         style={{ objectFit: cover ? 'cover' : 'contain' }}
         sizes={`${Math.ceil((width / window.innerWidth) * 100)}vw`}
       />
