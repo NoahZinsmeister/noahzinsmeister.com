@@ -20,8 +20,8 @@
 .yMargin {
   display: flex;
   flex-grow: 1;
-  margin-top: 4rem;
-  margin-bottom: 4rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
 }
 
 .container {
