@@ -17,7 +17,7 @@ export default function Page() {
           Email
         </a>
         <a href="https://twitter.com/NoahZinsmeister" target="_blank">
-          Twitter
+          Twitter (X)
         </a>
         <a href="https://github.com/NoahZinsmeister" target="_blank">
           GitHub
@@ -32,7 +32,7 @@ export default function Page() {
             studied Economics-Mathematics at Columbia, and after a close call
             with a PhD I fell down the cryptocurrency rabbit hole. At the moment
             I&apos;m working on some personal projects, and in my free time I
-            enjoy tennis, vegetarian food, motorcycles, and wine.
+            enjoy tennis, fashion, vegetarian food, and wine.
           </p>
         </div>
 
