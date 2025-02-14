@@ -28,11 +28,11 @@ export default function Page() {
         <div className={styles.section}>
           <h1 role="img">🎙️</h1>
           <p className={styles.description}>
-            I&apos;m a programmer and technologist based in Brooklyn, NY. I
-            studied Economics-Mathematics at Columbia, and after a close call
-            with a PhD I fell down the cryptocurrency rabbit hole. At the moment
-            I&apos;m working on some personal projects, and in my free time I
-            enjoy tennis, fashion, vegetarian food, and wine.
+            Hi, I&apos;m Noah. I fell in love with New York at Columbia, where I
+            studied Econ-Math, and I&apos;ve been in the city ever since. After
+            a close call with a PhD, I went to work for a crypto start-up. At
+            the moment I&apos;m working on some personal projects, and in my
+            free time I enjoy tennis, fashion, vegetarian food, and wine.
           </p>
         </div>
 
@@ -74,7 +74,7 @@ export default function Page() {
         <div className={styles.section}>
           <h1 role="img">📷</h1>
           <p className={styles.photography}>
-            <Link href="/photography">Noah Zinsmeister Photography</Link>
+            <Link href="/photography">Photography</Link>
             <a href="https://fingerlakesfeast.com" target="_blank">
               Finger Lakes Feast
             </a>

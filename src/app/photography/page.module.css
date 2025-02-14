@@ -14,7 +14,7 @@
 }
 
 .linkBack {
-  color: inherit
+  color: inherit;
 }
 
 .yMargin {
@@ -29,7 +29,7 @@
   flex-wrap: wrap;
   margin: auto;
   justify-content: center;
-  max-width: calc(16rem * 4);
+  max-width: calc(16rem * 3);
 }
 
 .container > button {
@@ -56,8 +56,8 @@
 }
 
 .container > button > span > h1 {
-  background-color: rgba(var(--background-end-rgb), .5);
+  background-color: rgba(var(--background-end-rgb), 0.5);
   color: rgb(var(--foreground-rgb));
-  padding: .5rem;
+  padding: 0.5rem;
   line-height: 1;
 }

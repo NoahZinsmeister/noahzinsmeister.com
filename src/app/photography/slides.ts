@@ -6,15 +6,6 @@ import { default as buildings4 } from '../../../public/buildings4.jpg'
 import { default as buildings5 } from '../../../public/buildings5.jpg'
 import { default as buildings6 } from '../../../public/buildings6.jpg'
 
-import { default as events0 } from '../../../public/events0.jpg'
-import { default as events1 } from '../../../public/events1.jpg'
-import { default as events2 } from '../../../public/events2.jpg'
-import { default as events3 } from '../../../public/events3.jpg'
-import { default as events4 } from '../../../public/events4.jpg'
-import { default as events5 } from '../../../public/events5.jpg'
-import { default as events6 } from '../../../public/events6.jpg'
-import { default as events7 } from '../../../public/events7.jpg'
-
 import { default as food0 } from '../../../public/food0.jpg'
 import { default as food1 } from '../../../public/food1.jpg'
 import { default as food2 } from '../../../public/food2.jpg'
@@ -36,15 +27,6 @@ import { default as nature7 } from '../../../public/nature7.jpg'
 import { default as nature8 } from '../../../public/nature8.jpg'
 import { default as nature9 } from '../../../public/nature9.jpg'
 
-import { default as portraits0 } from '../../../public/portraits0.jpg'
-import { default as portraits1 } from '../../../public/portraits1.jpg'
-import { default as portraits2 } from '../../../public/portraits2.jpg'
-import { default as portraits3 } from '../../../public/portraits3.jpg'
-import { default as portraits4 } from '../../../public/portraits4.jpg'
-import { default as portraits5 } from '../../../public/portraits5.jpg'
-import { default as portraits6 } from '../../../public/portraits6.jpg'
-import { default as portraits7 } from '../../../public/portraits7.jpg'
-
 import { default as urban0 } from '../../../public/urban0.jpg'
 import { default as urban1 } from '../../../public/urban1.jpg'
 import { default as urban2 } from '../../../public/urban2.jpg'
@@ -64,17 +46,6 @@ export const buildings = [
   buildings6,
 ]
 
-export const events = [
-  events0,
-  events1,
-  events2,
-  events3,
-  events4,
-  events5,
-  events6,
-  events7,
-]
-
 export const food = [food0, food1, food2, food3, food4, food5, food6, food7]
 
 export const nature = [
@@ -89,17 +60,6 @@ export const nature = [
   nature8,
   nature9,
   nature10,
-]
-
-export const portraits = [
-  portraits0,
-  portraits1,
-  portraits2,
-  portraits3,
-  portraits4,
-  portraits5,
-  portraits6,
-  portraits7,
 ]
 
 export const urban = [

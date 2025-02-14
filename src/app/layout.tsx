@@ -6,7 +6,6 @@ const font = Libre_Franklin({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Noah Zinsmeister',
-  description: "Noah Zinsmeister's personal website",
 }
 
 export default function RootLayout({

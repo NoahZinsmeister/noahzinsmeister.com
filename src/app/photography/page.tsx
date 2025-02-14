@@ -5,7 +5,6 @@ import styles from './page.module.css'
 
 export const metadata: Metadata = {
   title: 'Noah Zinsmeister Photography',
-  description: "Noah Zinsmeister's photography",
 }
 
 export default function Page() {
