@@ -28,11 +28,12 @@ export default function Page() {
         <div className={styles.section}>
           <h1 role="img">🎙️</h1>
           <p className={styles.description}>
-            Hi, I&apos;m Noah. I fell in love with New York at Columbia, where I
-            studied Econ-Math, and I&apos;ve been in the city ever since. After
-            a close call with a PhD, I went to work for a crypto start-up. At
-            the moment I&apos;m working on some personal projects, and in my
-            free time I enjoy tennis, fashion, vegetarian food, and wine.
+            Hi, I&apos;m Noah. I fell in love with New York during my time at
+            Columbia, where I studied Econ-Math, and I&apos;ve been in the city
+            ever since. After a close call with a PhD, I went to work for a
+            crypto start-up. At the moment I&apos;m working on some personal
+            projects, and in my free time I enjoy tennis, fashion, vegetarian
+            food, and wine.
           </p>
         </div>
 
