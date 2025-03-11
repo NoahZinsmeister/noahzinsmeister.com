@@ -40,6 +40,10 @@ export default function Page() {
         <div className={styles.section}>
           <h1 role="img">🖊️</h1>
           <p className={styles.writing}>
+            <a href="https://uniswap.org/whitepaper-v4.pdf" target="_blank">
+              Uniswap v4
+            </a>
+            <small>2024</small>
             <a href="https://uniswap.org/whitepaper-v3.pdf" target="_blank">
               Uniswap v3
             </a>
