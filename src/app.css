@@ -39,7 +39,7 @@
   --sidebar-ring: oklch(0.704 0.04 256.788);
 
   --background-start-rgb: 50, 100, 175, 0.25;
-  --background-end-rgb: 255, 250, 50, 0.25;
+  --background-end-rgb: 250, 250, 175, 0.25;
 }
 
 .dark {
@@ -131,7 +131,7 @@
 }
 
 body {
-  background: linear-gradient(to bottom,
+  background: linear-gradient(to top,
       transparent,
       rgba(var(--background-end-rgb))) rgba(var(--background-start-rgb));
   min-height: 100svh;

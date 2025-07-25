@@ -7,17 +7,17 @@
 	</div>
 	<div class="mt-16 max-w-screen-md space-y-8">
 		<div class="flex flex-row">
-			<h1 role="img" class="mr-4 text-4xl">🎙️</h1>
+			<h1 role="img" class="mr-4 text-4xl select-none">🎙️</h1>
 			<p class="leading-5!">
-				Hi, I'm Noah! I fell in love with New York during my time at Columbia, where I studied
-				Econ-Math, and I've been in the city ever since. After a close call with a PhD, I went to
-				work for a crypto start-up. At the moment I'm working on some personal projects, and in my
-				free time I enjoy tennis, fashion, vegetarian food, and wine.
+				Hi, I'm Noah! I fell in love with New York City during my time at Columbia, where I studied
+				Econ-Math, and I've been here ever since. After a close call with a PhD I went to work for a
+				startup, and at the moment I'm tinkering on some personal projects. In my free time I enjoy
+				tennis, theater, fashion, vegetarian food, and wine.
 			</p>
 		</div>
 
 		<div class="flex flex-row">
-			<h1 role="img" class="mr-4 text-4xl">🖊️</h1>
+			<h1 role="img" class="mr-4 text-4xl select-none">🖊️</h1>
 			<div class="flex flex-col space-y-4">
 				<div>
 					<a href="https://uniswap.org/whitepaper-v4.pdf" target="_blank">Uniswap v4 </a>
@@ -68,9 +68,9 @@
 			</div>
 		</div>
 		<div class="flex flex-row">
-			<h1 role="img" class="mr-4 text-4xl">📷</h1>
+			<h1 role="img" class="mr-4 text-4xl select-none">📷</h1>
 			<div class="flex flex-col space-y-4">
-				<a href="/photography">Photography</a>
+				<a href="/photography">Personal Portfolio</a>
 				<a href="https://fingerlakesfeast.com" target="_blank"> Finger Lakes Feast </a>
 			</div>
 		</div>
