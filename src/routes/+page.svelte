@@ -10,9 +10,10 @@
 			<h1 role="img" class="mr-4 text-4xl select-none">🎙️</h1>
 			<p class="leading-5!">
 				Hi, I'm Noah! I fell in love with New York City during my time at Columbia, where I studied
-				Econ-Math, and I've been here ever since. After a close call with a PhD I went to work for a
-				startup, and at the moment I'm tinkering on some personal projects. In my free time I enjoy
-				tennis, theater, fashion, vegetarian food, and wine.
+				Econ-Math, and I've been here ever since. After a close call with a PhD I went on to work
+				for a startup, and at the moment I'm tinkering on some personal projects. I'm also honored
+				to serve on the board of St. Ann's Warehouse. In my free time I enjoy tennis, theater,
+				fashion, vegetarian food, and wine.
 			</p>
 		</div>
 
